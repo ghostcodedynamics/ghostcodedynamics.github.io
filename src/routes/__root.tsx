@@ -140,6 +140,25 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const ORG_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "GhostCode Dynamics",
+  description:
+    "Founder-led technology brand building digital solutions for businesses while empowering the next generation of tech professionals.",
+  email: "ghostcodedynamics@gmail.com",
+  founder: {
+    "@type": "Person",
+    name: "Jeet Ahirwar",
+    jobTitle: "Founder",
+    sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
+  },
+  sameAs: [
+    "https://www.linkedin.com/company/ghostcodedynamics/",
+    "https://www.instagram.com/ghostcode_dynamics",
+  ],
+});
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -154,6 +173,10 @@ function RootComponent() {
           <SiteFooter />
         </div>
         <Toaster richColors position="top-center" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: ORG_JSON_LD }}
+        />
       </ThemeProvider>
     </QueryClientProvider>
   );
