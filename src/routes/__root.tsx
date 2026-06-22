@@ -97,19 +97,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0a0a12" },
       { property: "og:site_name", content: "GhostCode Dynamics" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "GhostCode Dynamics" },
+      { property: "og:title", content: "GhostCode Dynamics — Building Digital Solutions" },
       {
         property: "og:description",
         content:
           "Building digital solutions for businesses while empowering the next generation of tech professionals.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "GhostCode Dynamics" },
+      { name: "twitter:title", content: "GhostCode Dynamics — Building Digital Solutions" },
       {
         name: "twitter:description",
         content:
           "Building digital solutions for businesses while empowering the next generation of tech professionals.",
       },
+      { name: "description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
+      { property: "og:description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
+      { name: "twitter:description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
