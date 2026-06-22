@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="container-prose py-16">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Logo />
+            <Logo height={38} />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Building digital solutions for businesses while empowering the next generation of tech professionals.
             </p>
