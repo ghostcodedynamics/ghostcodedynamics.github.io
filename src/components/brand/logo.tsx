@@ -1,48 +1,72 @@
+/**
+ * GhostCode Dynamics — Brand Logo System
+ * ---------------------------------------------------------------
+ * This file is the single source of truth for the brand mark across
+ * the navbar, footer, mobile menu, favicon, OG images, etc.
+ *
+ * REPLACING THE PLACEHOLDER WITH THE FINAL PNG (≤ 2 min):
+ *   1. Drop the final files into `src/assets/brand/`:
+ *        - logo-mark.png         (square icon, ≥ 512×512)
+ *        - logo-mark-light.png   (optional, for light backgrounds)
+ *        - logo-full.png         (optional full lockup; if absent we
+ *                                 keep the SVG monogram + typeset wordmark)
+ *   2. Flip `USE_PNG_MARK = true` below.
+ *   3. (Optional) Replace `public/favicon.svg` with the new icon.
+ *
+ * Nothing else in the codebase needs to change — every surface
+ * imports <Logo />, <LogoCompact />, or <LogoMark /> from this file.
+ * ---------------------------------------------------------------
+ */
+
 import { cn } from "@/lib/utils";
 
-interface LogoProps {
-  className?: string;
-  iconOnly?: boolean;
+// Toggle this to `true` once the founder ships the final PNG assets.
+const USE_PNG_MARK = false;
+
+// When USE_PNG_MARK is true these are imported lazily by <LogoMark />.
+// Keeping them as string paths means the build never fails if the
+// PNGs are not yet present in the repo.
+const PNG_MARK_DARK = "/brand/logo-mark.png";
+const PNG_MARK_LIGHT = "/brand/logo-mark-light.png";
+
+// ---------------------------------------------------------------
+// Variant: <LogoMark /> — icon only (favicon, app icon, avatar)
+// ---------------------------------------------------------------
+
+interface LogoMarkProps {
   size?: number;
+  className?: string;
+  /** Force a specific contrast mode. Defaults to currentColor (auto). */
+  tone?: "auto" | "dark" | "light";
 }
 
 /**
- * GhostCode Dynamics brand mark.
- * The "G" of the wordmark is represented by the ghost-in-circle icon,
- * so the visible wordmark reads "hostCode / DYNAMICS".
+ * Ghost-in-monogram mark. Pure SVG so it is sharp on every density,
+ * inherits theme color via `currentColor`, and ships zero bytes of
+ * raster data until the real PNG is wired in.
  */
-export function Logo({ className, iconOnly = false, size = 32 }: LogoProps) {
-  return (
-    <div
-      className={cn("flex items-center gap-2.5", className)}
-      aria-label="GhostCode Dynamics"
-    >
-      <GhostIcon size={size} />
-      {!iconOnly && (
-        <span className="flex flex-col leading-none font-display">
-          <span className="text-[1.05rem] font-semibold tracking-tight text-foreground">
-            hostCode
-          </span>
-          <span className="text-[0.6rem] font-medium tracking-[0.32em] text-muted-foreground mt-0.5">
-            DYNAMICS
-          </span>
-        </span>
-      )}
-    </div>
-  );
-}
+export function LogoMark({ size = 32, className, tone = "auto" }: LogoMarkProps) {
+  if (USE_PNG_MARK) {
+    const src = tone === "light" ? PNG_MARK_LIGHT : PNG_MARK_DARK;
+    return (
+      <img
+        src={src}
+        width={size}
+        height={size}
+        alt="GhostCode Dynamics"
+        className={cn("shrink-0 select-none", className)}
+        draggable={false}
+      />
+    );
+  }
 
-/**
- * Ghost-in-G mark. Uses currentColor so it inverts cleanly on light/dark
- * backgrounds without altering the original black / white / gray palette.
- */
-export function GhostIcon({
-  size = 32,
-  className,
-}: {
-  size?: number;
-  className?: string;
-}) {
+  const fg =
+    tone === "dark"
+      ? "#0a0a0f"
+      : tone === "light"
+        ? "#ffffff"
+        : "currentColor";
+
   return (
     <svg
       width={size}
@@ -50,41 +74,98 @@ export function GhostIcon({
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("shrink-0 text-foreground", className)}
+      className={cn("shrink-0", className)}
       role="img"
-      aria-label="GhostCode Dynamics logo"
+      aria-label="GhostCode Dynamics"
+      shapeRendering="geometricPrecision"
     >
-      {/* Solid disc — uses currentColor so it adapts to theme */}
-      <circle cx="32" cy="32" r="30" fill="currentColor" />
+      {/* Rounded squircle backdrop — the monogram "G" */}
+      <rect x="1" y="1" width="62" height="62" rx="16" fill={fg} />
 
-      {/* G opening on the right side (notch carved out of the disc) */}
+      {/* Ghost silhouette cut out of the squircle */}
       <path
-        d="M44 28h-9v8h5v4a10 10 0 1 1-3-15"
-        stroke="var(--background)"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-        opacity="0"
-      />
-
-      {/* Ghost silhouette in the center, in the background color so it
-          appears as a cut-out on both light and dark themes */}
-      <path
-        d="M32 16c-7 0-12 5-12 12v18c0 1.4 1.6 2.2 2.7 1.3l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c.6.5 1.5.5 2.1 0l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c1.1.9 2.7.1 2.7-1.3V28c0-7-5-12-12-12Z"
+        d="M32 16c-7 0-12 5-12 12v18.2c0 1.4 1.6 2.2 2.7 1.3l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c.6.5 1.5.5 2.1 0l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c1.1.9 2.7.1 2.7-1.3V28c0-7-5-12-12-12Z"
         fill="var(--background)"
       />
 
-      {/* Soft gray tail/shadow on the ghost for the original 3-tone look */}
-      <path
-        d="M38 38c2.5 1.5 4.5 4 5 7-1 .5-2.5.4-3.6-.4L37 43.5V38Z"
-        fill="currentColor"
-        opacity="0.35"
-      />
+      {/* Eyes — restate foreground for a crisp 3-tone read */}
+      <circle cx="28.4" cy="29.5" r="1.9" fill={fg} />
+      <circle cx="35.6" cy="29.5" r="1.9" fill={fg} />
 
-      {/* Eyes */}
-      <circle cx="28.5" cy="29" r="1.8" fill="currentColor" />
-      <circle cx="35.5" cy="29" r="1.8" fill="currentColor" />
+      {/* Subtle "C / D" tick: opening on the right side of the G */}
+      <path
+        d="M46 30v6"
+        stroke="var(--background)"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
+
+// ---------------------------------------------------------------
+// Variant: <Logo /> — full lockup (icon + "GhostCode Dynamics")
+// ---------------------------------------------------------------
+
+interface LogoProps {
+  className?: string;
+  size?: number;
+  /** Hide the wordmark, keep only the mark. */
+  iconOnly?: boolean;
+}
+
+export function Logo({ className, size = 32, iconOnly = false }: LogoProps) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2.5 transition-transform duration-300 ease-out group-hover:scale-[1.02]",
+        className,
+      )}
+      aria-label="GhostCode Dynamics"
+    >
+      <LogoMark size={size} />
+      {!iconOnly && <Wordmark />}
+    </span>
+  );
+}
+
+// ---------------------------------------------------------------
+// Variant: <LogoCompact /> — icon + "GCD" (tight navs, mobile)
+// ---------------------------------------------------------------
+
+export function LogoCompact({ className, size = 28 }: LogoProps) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 transition-transform duration-300 ease-out group-hover:scale-[1.02]",
+        className,
+      )}
+      aria-label="GhostCode Dynamics"
+    >
+      <LogoMark size={size} />
+      <span className="font-display text-base font-semibold tracking-[0.18em] text-foreground">
+        GCD
+      </span>
+    </span>
+  );
+}
+
+// ---------------------------------------------------------------
+// Wordmark — geometric, Linear / Vercel / Stripe inspired
+// ---------------------------------------------------------------
+
+function Wordmark() {
+  return (
+    <span className="font-display text-[1.02rem] leading-none tracking-tight text-foreground">
+      <span className="font-semibold">Ghost</span>
+      <span className="font-medium text-foreground/85">Code</span>
+      <span className="mx-1 text-muted-foreground/60">·</span>
+      <span className="font-medium tracking-[0.02em] text-muted-foreground">
+        Dynamics
+      </span>
+    </span>
+  );
+}
+
+// Re-export the icon under its previous name to keep older imports working.
+export { LogoMark as GhostIcon };
