@@ -44,6 +44,7 @@ const TIMELINE = [
 function FounderPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: PERSON_JSON_LD }} />
       <PageHero eyebrow="Founder" title="From Learner to Builder.">
         <p className="-mt-2 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           The story behind GhostCode Dynamics — written by someone still in love with the craft.
