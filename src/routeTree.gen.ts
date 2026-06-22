@@ -9,8 +9,98 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as LabsRouteImport } from './routes/labs'
+import { Route as InternshipsRouteImport } from './routes/internships'
+import { Route as FounderRouteImport } from './routes/founder'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AcademyRouteImport } from './routes/academy'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabsRoute = LabsRouteImport.update({
+  id: '/labs',
+  path: '/labs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternshipsRoute = InternshipsRouteImport.update({
+  id: '/internships',
+  path: '/internships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FounderRoute = FounderRouteImport.update({
+  id: '/founder',
+  path: '/founder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyRoute = AcademyRouteImport.update({
+  id: '/academy',
+  path: '/academy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +109,242 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
+  '/events': typeof EventsRoute
+  '/founder': typeof FounderRoute
+  '/internships': typeof InternshipsRoute
+  '/labs': typeof LabsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
+  '/events': typeof EventsRoute
+  '/founder': typeof FounderRoute
+  '/internships': typeof InternshipsRoute
+  '/labs': typeof LabsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/blog': typeof BlogRoute
+  '/careers': typeof CareersRoute
+  '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/courses': typeof CoursesRoute
+  '/events': typeof EventsRoute
+  '/founder': typeof FounderRoute
+  '/internships': typeof InternshipsRoute
+  '/labs': typeof LabsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verify': typeof VerifyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/academy'
+    | '/blog'
+    | '/careers'
+    | '/community'
+    | '/contact'
+    | '/courses'
+    | '/events'
+    | '/founder'
+    | '/internships'
+    | '/labs'
+    | '/portfolio'
+    | '/services'
+    | '/sitemap.xml'
+    | '/verify'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/academy'
+    | '/blog'
+    | '/careers'
+    | '/community'
+    | '/contact'
+    | '/courses'
+    | '/events'
+    | '/founder'
+    | '/internships'
+    | '/labs'
+    | '/portfolio'
+    | '/services'
+    | '/sitemap.xml'
+    | '/verify'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/academy'
+    | '/blog'
+    | '/careers'
+    | '/community'
+    | '/contact'
+    | '/courses'
+    | '/events'
+    | '/founder'
+    | '/internships'
+    | '/labs'
+    | '/portfolio'
+    | '/services'
+    | '/sitemap.xml'
+    | '/verify'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AcademyRoute: typeof AcademyRoute
+  BlogRoute: typeof BlogRoute
+  CareersRoute: typeof CareersRoute
+  CommunityRoute: typeof CommunityRoute
+  ContactRoute: typeof ContactRoute
+  CoursesRoute: typeof CoursesRoute
+  EventsRoute: typeof EventsRoute
+  FounderRoute: typeof FounderRoute
+  InternshipsRoute: typeof InternshipsRoute
+  LabsRoute: typeof LabsRoute
+  PortfolioRoute: typeof PortfolioRoute
+  ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VerifyRoute: typeof VerifyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/labs': {
+      id: '/labs'
+      path: '/labs'
+      fullPath: '/labs'
+      preLoaderRoute: typeof LabsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internships': {
+      id: '/internships'
+      path: '/internships'
+      fullPath: '/internships'
+      preLoaderRoute: typeof InternshipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founder': {
+      id: '/founder'
+      path: '/founder'
+      fullPath: '/founder'
+      preLoaderRoute: typeof FounderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy': {
+      id: '/academy'
+      path: '/academy'
+      fullPath: '/academy'
+      preLoaderRoute: typeof AcademyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +357,22 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AcademyRoute: AcademyRoute,
+  BlogRoute: BlogRoute,
+  CareersRoute: CareersRoute,
+  CommunityRoute: CommunityRoute,
+  ContactRoute: ContactRoute,
+  CoursesRoute: CoursesRoute,
+  EventsRoute: EventsRoute,
+  FounderRoute: FounderRoute,
+  InternshipsRoute: InternshipsRoute,
+  LabsRoute: LabsRoute,
+  PortfolioRoute: PortfolioRoute,
+  ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VerifyRoute: VerifyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
