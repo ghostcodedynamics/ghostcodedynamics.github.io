@@ -31,8 +31,7 @@ const PERSON_JSON_LD = JSON.stringify({
   knowsAbout: ["MERN Stack", "Cybersecurity", "Web Development", "Mentorship"],
   sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
 });
-  component: FounderPage,
-});
+
 
 const TIMELINE = [
   { year: "Early", title: "First lines of code", desc: "Discovered programming and got hooked on solving real problems with code." },
