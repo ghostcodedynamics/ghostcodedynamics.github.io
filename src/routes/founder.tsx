@@ -53,13 +53,13 @@ function FounderPage() {
       <section className="container-prose pb-16 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-12 items-start">
           <Reveal className="lg:col-span-5 lg:sticky lg:top-28">
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-3xl glass-strong ring-glow">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[220px] overflow-hidden rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-border/60 sm:max-w-[260px] lg:max-w-[300px]">
               <img
                 src={founderImg}
                 alt="Jeet Ahirwar — Founder of GhostCode Dynamics"
                 className="h-full w-full object-cover"
-                width={896}
-                height={1120}
+                width={600}
+                height={750}
                 loading="eager"
               />
             </div>
