@@ -115,29 +115,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "GhostCode Dynamics",
-          description:
-            "Founder-led technology brand building digital solutions for businesses while empowering the next generation of tech professionals.",
-          email: "ghostcodedynamics@gmail.com",
-          founder: {
-            "@type": "Person",
-            name: "Jeet Ahirwar",
-            jobTitle: "Founder",
-            sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
-          },
-          sameAs: [
-            "https://www.linkedin.com/company/ghostcodedynamics/",
-            "https://www.instagram.com/ghostcode_dynamics",
-          ],
-        }),
-      },
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
