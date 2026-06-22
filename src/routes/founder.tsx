@@ -18,21 +18,19 @@ export const Route = createFileRoute("/founder")({
       { property: "og:url", content: "/founder" },
     ],
     links: [{ rel: "canonical", href: "/founder" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Jeet Ahirwar",
-          jobTitle: "Founder, GhostCode Dynamics",
-          alumniOf: "MCA — Cyber Security",
-          knowsAbout: ["MERN Stack", "Cybersecurity", "Web Development", "Mentorship"],
-          sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
-        }),
-      },
-    ],
   }),
+  component: FounderPage,
+});
+
+const PERSON_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jeet Ahirwar",
+  jobTitle: "Founder, GhostCode Dynamics",
+  alumniOf: "MCA — Cyber Security",
+  knowsAbout: ["MERN Stack", "Cybersecurity", "Web Development", "Mentorship"],
+  sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
+});
   component: FounderPage,
 });
 
