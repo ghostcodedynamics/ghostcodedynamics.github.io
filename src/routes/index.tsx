@@ -1,29 +1,526 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Code2,
+  GraduationCap,
+  ShieldCheck,
+  Sparkles,
+  Layers,
+  Zap,
+  Heart,
+} from "lucide-react";
+import { CtaLink } from "@/components/cta-button";
+import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
+import heroOrb from "@/assets/hero-orb.jpg";
+import founderImg from "@/assets/founder.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "GhostCode Dynamics — Building Digital Solutions" },
+      {
+        name: "description",
+        content:
+          "Founder-led technology brand. We build digital experiences for businesses and mentor the next generation of developers.",
+      },
+      { property: "og:title", content: "GhostCode Dynamics — Building Digital Solutions" },
+      {
+        property: "og:description",
+        content:
+          "Building digital solutions for businesses while empowering the next generation of tech professionals.",
+      },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <>
+      <Hero />
+      <ServicesBento />
+      <FeaturedProjects />
+      <WhyChoose />
+      <FounderSpotlight />
+      <FutureVision />
+      <ContactCta />
+    </>
+  );
+}
+
+/* -------------------- Hero -------------------- */
+function Hero() {
+  return (
+    <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+      <div className="absolute inset-0 bg-aurora opacity-80 pointer-events-none" aria-hidden />
+      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden />
+
+      <div className="container-prose relative grid gap-12 lg:grid-cols-12 lg:gap-8 items-center">
+        <div className="lg:col-span-7">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={stagger}
+            className="flex flex-col items-start"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs font-medium text-muted-foreground"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow" />
+              Founder-led · Building in public
+            </motion.div>
+
+            <motion.h1
+              variants={fadeUp}
+              className="mt-6 font-display text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+            >
+              <span className="text-gradient block">Building Digital</span>
+              <span className="text-gradient block">Solutions.</span>
+              <span className="block text-foreground/70 mt-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                Empowering Future Innovators.
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+            >
+              GhostCode Dynamics helps businesses build impactful digital experiences while
+              guiding aspiring professionals through practical technology solutions.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-3">
+              <CtaLink to="/contact" variant="primary">
+                Start Your Project
+              </CtaLink>
+              <CtaLink to="/portfolio" variant="secondary">
+                View Our Work
+              </CtaLink>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="mt-10 flex flex-wrap items-center gap-6 text-xs text-muted-foreground"
+            >
+              <Badge>MERN Stack</Badge>
+              <Badge>Cybersecurity Labs</Badge>
+              <Badge>Mentorship</Badge>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-5 relative"
+        >
+          <div className="relative aspect-square w-full max-w-[520px] mx-auto">
+            <div className="absolute inset-0 rounded-[2rem] bg-aurora opacity-90 blur-2xl" aria-hidden />
+            <div className="relative h-full w-full rounded-[2rem] overflow-hidden glass-strong ring-glow animate-float-slow">
+              <img
+                src={heroOrb}
+                alt="Glowing ghost mark — GhostCode Dynamics brand visual"
+                className="h-full w-full object-cover mix-blend-screen opacity-95"
+                width={896}
+                height={896}
+                fetchPriority="high"
+              />
+            </div>
+            {/* Floating chips */}
+            <FloatingChip className="absolute -left-4 top-12 hidden sm:flex" delay={0.4}>
+              <Code2 className="h-3.5 w-3.5 text-primary" />
+              MERN
+            </FloatingChip>
+            <FloatingChip className="absolute -right-2 top-1/3 hidden sm:flex" delay={0.6}>
+              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+              SIEM Lab
+            </FloatingChip>
+            <FloatingChip className="absolute left-6 -bottom-2 hidden sm:flex" delay={0.8}>
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              Shipping
+            </FloatingChip>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function Badge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+      <span className="h-1 w-1 rounded-full bg-primary/70" />
+      {children}
+    </span>
+  );
+}
+
+function FloatingChip({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6 }}
+      className={`inline-flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-xs font-medium text-foreground shadow-elevated ${className ?? ""}`}
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+      {children}
+    </motion.div>
+  );
+}
+
+/* -------------------- Services Bento -------------------- */
+function ServicesBento() {
+  return (
+    <section className="container-prose py-20 md:py-32">
+      <SectionHeader
+        eyebrow="What we do"
+        title={<>Practical solutions, <span className="text-gradient-primary">thoughtfully built.</span></>}
+        description="From shipping production apps for businesses to mentoring students through real projects — focused work, no fluff."
       />
-    </div>
+
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={stagger}
+        className="mt-14 grid gap-4 md:grid-cols-6 md:grid-rows-2"
+      >
+        <BentoCard
+          icon={<Code2 className="h-5 w-5" />}
+          title="Digital Solutions"
+          desc="Business websites, portfolios, landing pages and full web apps — built with MERN, designed for conversion."
+          className="md:col-span-4 md:row-span-1"
+          accent
+        />
+        <BentoCard
+          icon={<GraduationCap className="h-5 w-5" />}
+          title="Student Services"
+          desc="Project mentorship, portfolio development, and honest career guidance for aspiring developers."
+          className="md:col-span-2 md:row-span-2"
+        />
+        <BentoCard
+          icon={<ShieldCheck className="h-5 w-5" />}
+          title="Security Labs"
+          desc="Hands-on SIEM, incident response & phishing investigation projects."
+          className="md:col-span-2"
+        />
+        <BentoCard
+          icon={<Layers className="h-5 w-5" />}
+          title="Built to ship"
+          desc="Tight scope. Fast iteration. Quality you can review on GitHub."
+          className="md:col-span-2"
+        />
+      </motion.div>
+
+      <Reveal className="mt-10">
+        <Link
+          to="/services"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+        >
+          Explore all services <ArrowRight className="h-4 w-4" />
+        </Link>
+      </Reveal>
+    </section>
+  );
+}
+
+function BentoCard({
+  icon,
+  title,
+  desc,
+  className,
+  accent = false,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  className?: string;
+  accent?: boolean;
+}) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-6 md:p-8 transition-colors hover:border-primary/40 ${className ?? ""}`}
+    >
+      {accent && (
+        <div className="absolute inset-0 bg-aurora opacity-40 pointer-events-none" aria-hidden />
+      )}
+      <div className="relative">
+        <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border">
+          {icon}
+        </div>
+        <h3 className="mt-5 font-display text-xl font-semibold text-foreground">{title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* -------------------- Featured Projects -------------------- */
+const PROJECTS = [
+  {
+    name: "OpportunityX",
+    tag: "MERN Job Portal",
+    desc: "A modern job portal connecting candidates and recruiters with smart filtering and real-time updates.",
+    stack: ["React", "Node", "MongoDB", "Express"],
+  },
+  {
+    name: "Real-Time Chat",
+    tag: "Socket.IO",
+    desc: "Low-latency messaging platform with presence, typing indicators and message history.",
+    stack: ["React", "Socket.IO", "Node"],
+  },
+  {
+    name: "SIEM Brute Force Lab",
+    tag: "Splunk · Detection",
+    desc: "Detection engineering project: rules, dashboards and triage workflow for brute-force attempts.",
+    stack: ["Splunk", "SPL", "Sysmon"],
+  },
+];
+
+function FeaturedProjects() {
+  return (
+    <section className="relative border-y border-border/60 bg-surface/20">
+      <div className="container-prose py-20 md:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeader
+            eyebrow="Selected work"
+            title={<>Things we&apos;ve built.</>}
+            description="Real projects with code you can read. Live links coming soon."
+          />
+          <Reveal>
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              All projects <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Reveal>
+        </div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="mt-12 grid gap-5 md:grid-cols-3"
+        >
+          {PROJECTS.map((p) => (
+            <motion.article
+              key={p.name}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/40"
+            >
+              <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <p className="font-mono text-[10px] uppercase tracking-widest text-primary">{p.tag}</p>
+              <h3 className="mt-3 font-display text-xl font-semibold text-foreground">{p.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {p.stack.map((s) => (
+                  <span
+                    key={s}
+                    className="inline-flex items-center rounded-full border border-border bg-surface-elevated px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------- Why choose -------------------- */
+function WhyChoose() {
+  const items = [
+    {
+      icon: <Heart className="h-5 w-5" />,
+      title: "Founder-led",
+      desc: "You talk directly to the person building it. No middle layers, no handoffs.",
+    },
+    {
+      icon: <Zap className="h-5 w-5" />,
+      title: "Fast iteration",
+      desc: "Small, focused scope. Ship something real, review it, improve it.",
+    },
+    {
+      icon: <ShieldCheck className="h-5 w-5" />,
+      title: "Transparent process",
+      desc: "Honest timelines, public code, clear deliverables — no inflated promises.",
+    },
+    {
+      icon: <GraduationCap className="h-5 w-5" />,
+      title: "Always learning",
+      desc: "Built by someone bridging cybersecurity, MERN and modern web together.",
+    },
+  ];
+  return (
+    <section className="container-prose py-20 md:py-32">
+      <SectionHeader
+        eyebrow="Why GhostCode"
+        title={<>A growing brand built on substance.</>}
+        description="GhostCode Dynamics isn't a giant agency. It's a focused founder operation — small enough to care, serious enough to deliver."
+      />
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={stagger}
+        className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {items.map((it) => (
+          <motion.div
+            key={it.title}
+            variants={fadeUp}
+            className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/40"
+          >
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border">
+              {it.icon}
+            </div>
+            <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{it.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+}
+
+/* -------------------- Founder Spotlight -------------------- */
+function FounderSpotlight() {
+  return (
+    <section className="relative overflow-hidden border-y border-border/60 bg-surface/20">
+      <div className="absolute inset-0 bg-aurora opacity-50 pointer-events-none" aria-hidden />
+      <div className="container-prose relative py-20 md:py-32 grid gap-12 lg:grid-cols-12 items-center">
+        <Reveal className="lg:col-span-5">
+          <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-3xl glass-strong ring-glow">
+            <img
+              src={founderImg}
+              alt="Jeet Ahirwar — Founder of GhostCode Dynamics"
+              className="h-full w-full object-cover"
+              width={896}
+              height={1120}
+              loading="lazy"
+            />
+          </div>
+        </Reveal>
+
+        <div className="lg:col-span-7">
+          <Reveal>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">The founder</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              From learner to builder.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              I&apos;m <span className="text-foreground">Jeet Ahirwar</span> — an MCA graduate
+              specializing in cybersecurity and a MERN stack developer. I started GhostCode Dynamics
+              to build practical digital solutions while helping aspiring developers bridge the gap
+              between learning and real industry work.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <CtaLink to="/founder" variant="secondary">
+                Read my story
+              </CtaLink>
+              <CtaLink to="/about" variant="ghost">
+                About GhostCode
+              </CtaLink>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------- Future vision -------------------- */
+function FutureVision() {
+  const items = [
+    "GhostCode Academy",
+    "Internships",
+    "Cohort Workshops",
+    "Certificate Verification",
+    "Student Community",
+    "Open Labs",
+  ];
+  return (
+    <section className="container-prose py-20 md:py-32">
+      <SectionHeader
+        eyebrow="What's next"
+        title={<>Built to grow — without losing its soul.</>}
+        description="The roadmap goes beyond client work. We're building an ecosystem for students, builders and learners."
+        align="center"
+      />
+      <motion.ul
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={stagger}
+        className="mt-12 flex flex-wrap justify-center gap-3"
+      >
+        {items.map((label) => (
+          <motion.li
+            key={label}
+            variants={fadeUp}
+            className="rounded-full border border-border bg-surface/60 px-4 py-2 text-sm text-muted-foreground backdrop-blur hover:border-primary/40 hover:text-foreground transition-colors"
+          >
+            {label}
+            <span className="ml-2 text-[10px] font-mono uppercase tracking-widest text-primary/80">soon</span>
+          </motion.li>
+        ))}
+      </motion.ul>
+    </section>
+  );
+}
+
+/* -------------------- Contact CTA -------------------- */
+function ContactCta() {
+  return (
+    <section className="container-prose pb-24">
+      <Reveal>
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-10 md:p-16 text-center shadow-elevated">
+          <div className="absolute inset-0 bg-aurora opacity-70 pointer-events-none" aria-hidden />
+          <div className="relative">
+            <h2 className="mx-auto max-w-3xl font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl text-gradient">
+              Have an idea? Let&apos;s build something real.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Whether you need a website, a custom web app, or mentorship — start a conversation.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <CtaLink to="/contact" variant="primary">
+                Start a project
+              </CtaLink>
+              <CtaLink
+                href="mailto:ghostcodedynamics@gmail.com"
+                external
+                variant="secondary"
+                icon={false}
+              >
+                ghostcodedynamics@gmail.com
+              </CtaLink>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
   );
 }
