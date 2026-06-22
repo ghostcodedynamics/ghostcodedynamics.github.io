@@ -8,50 +8,83 @@ interface LogoProps {
 
 /**
  * GhostCode Dynamics brand mark.
- * SVG-based, easy to replace with a PNG later.
+ * The "G" of the wordmark is represented by the ghost-in-circle icon,
+ * so the visible wordmark reads "hostCode / DYNAMICS".
  */
-export function Logo({ className, iconOnly = false, size = 28 }: LogoProps) {
+export function Logo({ className, iconOnly = false, size = 32 }: LogoProps) {
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
+    <div
+      className={cn("flex items-center gap-2.5", className)}
+      aria-label="GhostCode Dynamics"
+    >
       <GhostIcon size={size} />
       {!iconOnly && (
-        <span className="font-display text-[1.05rem] tracking-tight leading-none">
-          <span className="font-bold text-foreground">Ghost</span>
-          <span className="font-medium text-muted-foreground">Code Dynamics</span>
+        <span className="flex flex-col leading-none font-display">
+          <span className="text-[1.05rem] font-semibold tracking-tight text-foreground">
+            hostCode
+          </span>
+          <span className="text-[0.6rem] font-medium tracking-[0.32em] text-muted-foreground mt-0.5">
+            DYNAMICS
+          </span>
         </span>
       )}
     </div>
   );
 }
 
-export function GhostIcon({ size = 28, className }: { size?: number; className?: string }) {
+/**
+ * Ghost-in-G mark. Uses currentColor so it inverts cleanly on light/dark
+ * backgrounds without altering the original black / white / gray palette.
+ */
+export function GhostIcon({
+  size = 32,
+  className,
+}: {
+  size?: number;
+  className?: string;
+}) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("shrink-0", className)}
-      aria-hidden="true"
+      className={cn("shrink-0 text-foreground", className)}
+      role="img"
+      aria-label="GhostCode Dynamics logo"
     >
-      <defs>
-        <linearGradient id="ghost-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="oklch(0.78 0.18 285)" />
-          <stop offset="100%" stopColor="oklch(0.62 0.2 245)" />
-        </linearGradient>
-        <radialGradient id="ghost-glow" cx="0.5" cy="0.4" r="0.6">
-          <stop offset="0%" stopColor="oklch(0.85 0.18 285 / 0.4)" />
-          <stop offset="100%" stopColor="oklch(0.5 0.2 285 / 0)" />
-        </radialGradient>
-      </defs>
-      <circle cx="16" cy="16" r="14" fill="url(#ghost-glow)" />
+      {/* Solid disc — uses currentColor so it adapts to theme */}
+      <circle cx="32" cy="32" r="30" fill="currentColor" />
+
+      {/* G opening on the right side (notch carved out of the disc) */}
       <path
-        d="M16 4.5c-5 0-8.5 3.6-8.5 8.5v12.2c0 1 1.1 1.6 1.9 1l1.6-1.2c.4-.3 1-.3 1.4 0l1.6 1.2c.4.3 1 .3 1.4 0l1.6-1.2c.4-.3 1-.3 1.4 0l1.6 1.2c.8.6 1.9 0 1.9-1V13c0-4.9-3.5-8.5-8.4-8.5Z"
-        fill="url(#ghost-grad)"
+        d="M44 28h-9v8h5v4a10 10 0 1 1-3-15"
+        stroke="var(--background)"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        opacity="0"
       />
-      <circle cx="12.5" cy="14" r="1.4" fill="oklch(0.15 0.02 270)" />
-      <circle cx="19.5" cy="14" r="1.4" fill="oklch(0.15 0.02 270)" />
+
+      {/* Ghost silhouette in the center, in the background color so it
+          appears as a cut-out on both light and dark themes */}
+      <path
+        d="M32 16c-7 0-12 5-12 12v18c0 1.4 1.6 2.2 2.7 1.3l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c.6.5 1.5.5 2.1 0l2.2-1.7c.6-.5 1.5-.5 2.1 0l2.2 1.7c1.1.9 2.7.1 2.7-1.3V28c0-7-5-12-12-12Z"
+        fill="var(--background)"
+      />
+
+      {/* Soft gray tail/shadow on the ghost for the original 3-tone look */}
+      <path
+        d="M38 38c2.5 1.5 4.5 4 5 7-1 .5-2.5.4-3.6-.4L37 43.5V38Z"
+        fill="currentColor"
+        opacity="0.35"
+      />
+
+      {/* Eyes */}
+      <circle cx="28.5" cy="29" r="1.8" fill="currentColor" />
+      <circle cx="35.5" cy="29" r="1.8" fill="currentColor" />
     </svg>
   );
 }
