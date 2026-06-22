@@ -74,7 +74,7 @@ function PortfolioPage() {
         description="A growing collection of real projects across full-stack development and cybersecurity. Code-first, polished, documented."
       />
 
-      <section className="container-prose pb-24">
+      <section className="container-prose pt-16 pb-24 md:pt-20">
         <motion.div
           initial="hidden"
           whileInView="show"

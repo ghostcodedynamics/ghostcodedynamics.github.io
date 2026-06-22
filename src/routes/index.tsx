@@ -13,7 +13,7 @@ import {
 import { CtaLink } from "@/components/cta-button";
 import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import heroOrb from "@/assets/hero-orb.jpg";
-import founderImg from "@/assets/founder.jpg";
+import founderImg from "@/assets/founder.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -410,9 +410,9 @@ function FounderSpotlight() {
   return (
     <section className="relative overflow-hidden border-y border-border/60 bg-surface/20">
       <div className="absolute inset-0 bg-aurora opacity-50 pointer-events-none" aria-hidden />
-      <div className="container-prose relative py-20 md:py-32 grid gap-12 lg:grid-cols-12 items-center">
+      <div className="container-prose relative py-20 md:py-28 grid gap-10 lg:grid-cols-12 items-center">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-[4/5] w-full max-w-md mx-auto overflow-hidden rounded-3xl glass-strong ring-glow">
+          <div className="relative aspect-[4/5] w-full max-w-[240px] mx-auto overflow-hidden rounded-3xl glass-strong ring-glow sm:max-w-[280px] lg:max-w-[290px]">
             <img
               src={founderImg}
               alt="Jeet Ahirwar — Founder of GhostCode Dynamics"

@@ -69,7 +69,7 @@ function ContactPage() {
         description="Tell us about your project, idea, or what you're trying to learn. Real replies from a real person — usually within a day or two."
       />
 
-      <section className="container-prose pb-24">
+      <section className="container-prose pt-16 pb-24 md:pt-20">
         <div className="grid gap-10 lg:grid-cols-12">
           {/* Form */}
           <Reveal className="lg:col-span-7">

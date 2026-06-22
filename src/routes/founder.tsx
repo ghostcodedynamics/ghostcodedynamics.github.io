@@ -3,7 +3,7 @@ import { Linkedin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
-import founderImg from "@/assets/founder.jpg";
+import founderImg from "@/assets/founder.png";
 
 export const Route = createFileRoute("/founder")({
   head: () => ({
@@ -11,7 +11,8 @@ export const Route = createFileRoute("/founder")({
       { title: "Founder — Jeet Ahirwar · GhostCode Dynamics" },
       {
         name: "description",
-        content: "Meet Jeet Ahirwar — MCA (Cybersecurity), MERN developer, and founder of GhostCode Dynamics.",
+        content:
+          "Meet Jeet Ahirwar — MCA (Cybersecurity), MERN developer, and founder of GhostCode Dynamics.",
       },
       { property: "og:title", content: "From Learner to Builder — Jeet Ahirwar" },
       { property: "og:description", content: "The founder behind GhostCode Dynamics." },
@@ -32,13 +33,32 @@ const PERSON_JSON_LD = JSON.stringify({
   sameAs: ["https://www.linkedin.com/in/jeetahirwar/"],
 });
 
-
 const TIMELINE = [
-  { year: "Early", title: "First lines of code", desc: "Discovered programming and got hooked on solving real problems with code." },
-  { year: "Education", title: "MCA — Cyber Security", desc: "Deep dive into security fundamentals, networks, and modern web technologies." },
-  { year: "Build phase", title: "MERN Stack Developer", desc: "Shipped full-stack projects — job portals, real-time apps, dashboards." },
-  { year: "Now", title: "Founded GhostCode Dynamics", desc: "Started a founder-led brand to combine building, mentoring and security learning." },
-  { year: "Next", title: "GhostCode Academy & Labs", desc: "Internships, workshops and an open community for student builders." },
+  {
+    year: "Early",
+    title: "First lines of code",
+    desc: "Discovered programming and got hooked on solving real problems with code.",
+  },
+  {
+    year: "Education",
+    title: "MCA — Cyber Security",
+    desc: "Deep dive into security fundamentals, networks, and modern web technologies.",
+  },
+  {
+    year: "Build phase",
+    title: "MERN Stack Developer",
+    desc: "Shipped full-stack projects — job portals, real-time apps, dashboards.",
+  },
+  {
+    year: "Now",
+    title: "Founded GhostCode Dynamics",
+    desc: "Started a founder-led brand to combine building, mentoring and security learning.",
+  },
+  {
+    year: "Next",
+    title: "GhostCode Academy & Labs",
+    desc: "Internships, workshops and an open community for student builders.",
+  },
 ];
 
 function FounderPage() {
@@ -50,7 +70,8 @@ function FounderPage() {
         </p>
       </PageHero>
 
-      <section className="container-prose pb-16 md:pb-24">
+      {/* <section className="container-prose pb-16 md:pb-24"> */}
+      <section className="container-prose pt-16 pb-16 md:pt-20 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-12 items-start">
           <Reveal className="lg:col-span-5 lg:sticky lg:top-28">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-[220px] overflow-hidden rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.35)] ring-1 ring-border/60 sm:max-w-[260px] lg:max-w-[300px]">
@@ -101,9 +122,7 @@ function FounderPage() {
             </Reveal>
 
             <Reveal>
-              <Heading label="Education & focus">
-                MCA — Cybersecurity. MERN by craft.
-              </Heading>
+              <Heading label="Education & focus">MCA — Cybersecurity. MERN by craft.</Heading>
               <Prose>
                 <p>
                   My focus areas blend cleanly: full-stack MERN development for building, and
@@ -125,8 +144,12 @@ function FounderPage() {
                 {TIMELINE.map((t) => (
                   <motion.li key={t.title} variants={fadeUp} className="relative">
                     <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-primary ring-4 ring-background" />
-                    <p className="font-mono text-[10px] uppercase tracking-widest text-primary">{t.year}</p>
-                    <p className="mt-1 font-display text-lg font-semibold text-foreground">{t.title}</p>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                      {t.year}
+                    </p>
+                    <p className="mt-1 font-display text-lg font-semibold text-foreground">
+                      {t.title}
+                    </p>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
                   </motion.li>
                 ))}
@@ -142,8 +165,12 @@ function FounderPage() {
                 </p>
               </Prose>
               <div className="mt-8 flex flex-wrap gap-3">
-                <CtaLink to="/contact" variant="primary">Work with me</CtaLink>
-                <CtaLink to="/portfolio" variant="secondary">See projects</CtaLink>
+                <CtaLink to="/contact" variant="primary">
+                  Work with me
+                </CtaLink>
+                <CtaLink to="/portfolio" variant="secondary">
+                  See projects
+                </CtaLink>
               </div>
             </Reveal>
           </div>
