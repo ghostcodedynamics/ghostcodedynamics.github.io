@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GhostCode Dynamics — Building Digital Solutions</title>
+    <meta
+      name="description"
+      content="GhostCode Dynamics is a founder-led technology brand building digital solutions for businesses and empowering the next generation of tech professionals."
+    />
+    <meta name="author" content="GhostCode Dynamics" />
+    <meta name="theme-color" content="#0a0a12" />
+
+    <meta property="og:site_name" content="GhostCode Dynamics" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GhostCode Dynamics — Building Digital Solutions" />
+    <meta
+      property="og:description"
+      content="Building digital solutions for businesses while empowering the next generation of tech professionals."
+    />
+    <meta
+      property="og:image"
+      content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GhostCode Dynamics — Building Digital Solutions" />
+    <meta
+      name="twitter:description"
+      content="Building digital solutions for businesses while empowering the next generation of tech professionals."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png"
+    />
+
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+
+    <script>
+      // Apply stored theme before paint to avoid flash
+      (function () {
+        try {
+          var t = localStorage.getItem("ghostcode-theme");
+          var isDark = t ? t === "dark" : true;
+          document.documentElement.classList.toggle("dark", isDark);
+          document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+        } catch (e) {}
+      })();
+
+      // GitHub Pages SPA fallback: if redirected from 404.html with ?/path, restore it.
+      (function () {
+        var l = window.location;
+        if (l.search && l.search.indexOf("?/") === 0) {
+          var decoded = l.search.slice(2).split("&").map(function (s) {
+            return s.replace(/~and~/g, "&");
+          }).join("?");
+          window.history.replaceState(null, "", l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-dvh bg-background text-foreground antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
