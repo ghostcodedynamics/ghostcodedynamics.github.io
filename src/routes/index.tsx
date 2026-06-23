@@ -10,10 +10,12 @@ import {
   Zap,
   Heart,
 } from "lucide-react";
+import { Lock, ShieldHalf, Cpu } from "lucide-react";
 import { CtaLink } from "@/components/cta-button";
 import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import heroOrb from "@/assets/hero-orb.jpg";
 import founderImg from "@/assets/founder.png";
+import msmeLogo from "@/assets/msme-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,12 +44,80 @@ function HomePage() {
     <>
       <Hero />
       <ServicesBento />
+      <WhyChooseUs />
       <FeaturedProjects />
       <WhyChoose />
       <FounderSpotlight />
       <FutureVision />
       <ContactCta />
     </>
+  );
+}
+
+/* -------------------- Why Choose Us (trust) -------------------- */
+function WhyChooseUs() {
+  const items = [
+    {
+      title: "MSME Registered Entity",
+      desc: "Officially registered under India's MSME framework.",
+      image: msmeLogo.url,
+    },
+    {
+      title: "Secure Development Practices",
+      desc: "Security-focused development and coding standards.",
+      icon: <ShieldCheck className="h-5 w-5" />,
+    },
+    {
+      title: "Data Privacy Focused",
+      desc: "Committed to responsible data protection practices.",
+      icon: <Lock className="h-5 w-5" />,
+    },
+    {
+      title: "Modern Technology Stack",
+      desc: "Built with modern web and software technologies.",
+      icon: <Cpu className="h-5 w-5" />,
+    },
+  ];
+  return (
+    <section id="why-choose-us" className="container-prose py-20 md:py-28 scroll-mt-24">
+      <SectionHeader
+        eyebrow="Why choose us"
+        title={<>Why Choose Us</>}
+        description="Built on trust, security, and modern development standards."
+      />
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={stagger}
+        className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {items.map((it) => (
+          <motion.div
+            key={it.title}
+            variants={fadeUp}
+            whileHover={{ y: -4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40"
+          >
+            <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border overflow-hidden">
+              {it.image ? (
+                <img
+                  src={it.image}
+                  alt="MSME Registered"
+                  className="h-8 w-8 object-contain"
+                  loading="lazy"
+                />
+              ) : (
+                it.icon
+              )}
+            </div>
+            <h3 className="mt-4 font-display text-base font-semibold text-foreground">{it.title}</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
   );
 }
 

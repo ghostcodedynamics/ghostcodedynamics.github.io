@@ -35,6 +35,7 @@ export function SiteFooter() {
               <FooterLink to="/portfolio">Portfolio</FooterLink>
               <FooterLink to="/about">About</FooterLink>
               <FooterLink to="/founder">Founder</FooterLink>
+              <FooterLink to="/" hash="why-choose-us">Why Choose Us</FooterLink>
               <FooterLink to="/contact">Contact</FooterLink>
             </ul>
           </div>
@@ -80,10 +81,14 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
   );
 }
 
-function FooterLink({ to, children }: { to: string; children: React.ReactNode }) {
+function FooterLink({ to, hash, children }: { to: string; hash?: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link to={to} className="text-muted-foreground transition-colors hover:text-foreground">
+      <Link
+        to={to}
+        hash={hash}
+        className="text-muted-foreground transition-colors hover:text-foreground"
+      >
         {children}
       </Link>
     </li>
