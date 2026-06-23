@@ -117,7 +117,7 @@ function WhyChooseUs() {
                 {it.icon}
               </div>
 
-              <h3 className="mt-4 font-display text-base font-semibold text-foreground">
+              <h3 className="mt-4 font-display text-base font-semibold text-foregroundd">
                 {it.title}
               </h3>
 
