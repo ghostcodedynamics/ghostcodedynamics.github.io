@@ -34,8 +34,26 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug build output
+        run: |
+          echo "Root files:"
+          ls -la
+          echo "Dist files:"
+          ls -la dist || true
+          echo "Dist client files:"
+          ls -la dist/client || true
+
       - name: Copy SPA fallback
-        run: cp dist/client/index.html dist/client/404.html
+        run: |
+          if [ -f dist/client/index.html ]; then
+            cp dist/client/index.html dist/client/404.html
+          elif [ -f dist/index.html ]; then
+            cp dist/index.html dist/404.html
+          else
+            echo "No index.html found"
+            find dist -maxdepth 3 -type f
+            exit 1
+          fi
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
