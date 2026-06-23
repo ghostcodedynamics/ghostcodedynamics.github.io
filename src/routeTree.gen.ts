@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyRouteImport } from './routes/verify'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as LabsRouteImport } from './routes/labs'
@@ -29,11 +28,6 @@ import { Route as IndexRouteImport } from './routes/index'
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
   path: '/verify',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -122,7 +116,6 @@ export interface FileRoutesByFullPath {
   '/labs': typeof LabsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verify': typeof VerifyRoute
 }
 export interface FileRoutesByTo {
@@ -140,7 +133,6 @@ export interface FileRoutesByTo {
   '/labs': typeof LabsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verify': typeof VerifyRoute
 }
 export interface FileRoutesById {
@@ -159,7 +151,6 @@ export interface FileRoutesById {
   '/labs': typeof LabsRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verify': typeof VerifyRoute
 }
 export interface FileRouteTypes {
@@ -179,7 +170,6 @@ export interface FileRouteTypes {
     | '/labs'
     | '/portfolio'
     | '/services'
-    | '/sitemap.xml'
     | '/verify'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -197,7 +187,6 @@ export interface FileRouteTypes {
     | '/labs'
     | '/portfolio'
     | '/services'
-    | '/sitemap.xml'
     | '/verify'
   id:
     | '__root__'
@@ -215,7 +204,6 @@ export interface FileRouteTypes {
     | '/labs'
     | '/portfolio'
     | '/services'
-    | '/sitemap.xml'
     | '/verify'
   fileRoutesById: FileRoutesById
 }
@@ -234,7 +222,6 @@ export interface RootRouteChildren {
   LabsRoute: typeof LabsRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VerifyRoute: typeof VerifyRoute
 }
 
@@ -245,13 +232,6 @@ declare module '@tanstack/react-router' {
       path: '/verify'
       fullPath: '/verify'
       preLoaderRoute: typeof VerifyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -370,19 +350,8 @@ const rootRouteChildren: RootRouteChildren = {
   LabsRoute: LabsRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   VerifyRoute: VerifyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

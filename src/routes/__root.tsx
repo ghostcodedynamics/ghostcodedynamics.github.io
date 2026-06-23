@@ -4,16 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
-  ScriptOnce,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
-
-import appCss from "../styles.css?url";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/space-grotesk";
-import "@fontsource-variable/jetbrains-mono";
+import { useEffect } from "react";
 
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -83,70 +75,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "GhostCode Dynamics — Building Digital Solutions" },
-      {
-        name: "description",
-        content:
-          "GhostCode Dynamics is a founder-led technology brand building digital solutions for businesses and empowering the next generation of tech professionals.",
-      },
-      { name: "author", content: "GhostCode Dynamics" },
-      { name: "theme-color", content: "#0a0a12" },
-      { property: "og:site_name", content: "GhostCode Dynamics" },
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: "GhostCode Dynamics — Building Digital Solutions" },
-      {
-        property: "og:description",
-        content:
-          "Building digital solutions for businesses while empowering the next generation of tech professionals.",
-      },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "GhostCode Dynamics — Building Digital Solutions" },
-      {
-        name: "twitter:description",
-        content:
-          "Building digital solutions for businesses while empowering the next generation of tech professionals.",
-      },
-      { name: "description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
-      { property: "og:description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
-      { name: "twitter:description", content: "A premium, founder-led startup website for GhostCode Dynamics, showcasing digital solutions and tech professional empowerment." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "any" },
-      { rel: "icon", href: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { rel: "icon", href: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <HeadContent />
-      </head>
-      <body className="min-h-dvh bg-background text-foreground antialiased">
-        {/* Apply stored theme before paint to avoid flash */}
-        <ScriptOnce
-          children={`(() => { try { const t = localStorage.getItem('ghostcode-theme'); const isDark = t ? t === 'dark' : true; document.documentElement.classList.toggle('dark', isDark); document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'; } catch(e){} })();`}
-        />
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
