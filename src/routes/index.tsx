@@ -9,13 +9,14 @@ import {
   Layers,
   Zap,
   Heart,
+  Landmark,
 } from "lucide-react";
 import { Lock, Cpu } from "lucide-react";
 import { CtaLink } from "@/components/cta-button";
 import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import heroOrb from "@/assets/hero-orb.jpg";
 import founderImg from "@/assets/founder.png";
-import msmeLogo from "@/assets/msme-logo.png.asset.json";
+import msmeLogo from "@/assets/MSME-Logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,7 +61,8 @@ function WhyChooseUs() {
     {
       title: "MSME Registered Entity",
       desc: "Officially registered under India's MSME framework.",
-      image: msmeLogo.url,
+      Image: msmeLogo,
+      icon: <Landmark className="h-5 w-5" />,
     },
     {
       title: "Secure Development Practices",
@@ -100,20 +102,27 @@ function WhyChooseUs() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40"
           >
-            <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border overflow-hidden">
-              {it.image ? (
-                <img
-                  src={it.image}
-                  alt="MSME Registered"
-                  className="h-8 w-8 object-contain"
-                  loading="lazy"
-                />
-              ) : (
-                it.icon
-              )}
+            {it.title === "MSME Registered Entity" && (
+              <img
+                src={msmeLogo}
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute right-3 bottom-3 h-25 w-25 select-none object-contain opacity-[0.50]"
+                // className="pointer-events-none absolute inset-0 m-auto h-36 w-36 object-contain opacity-[0.05]"
+              />
+            )}
+
+            <div className="relative z-10">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border">
+                {it.icon}
+              </div>
+
+              <h3 className="mt-4 font-display text-base font-semibold text-foreground">
+                {it.title}
+              </h3>
+
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
             </div>
-            <h3 className="mt-4 font-display text-base font-semibold text-foreground">{it.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -159,8 +168,8 @@ function Hero() {
               variants={fadeUp}
               className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
             >
-              GhostCode Dynamics helps businesses build impactful digital experiences while
-              guiding aspiring professionals through practical technology solutions.
+              GhostCode Dynamics helps businesses build impactful digital experiences while guiding
+              aspiring professionals through practical technology solutions.
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-3">
@@ -190,7 +199,10 @@ function Hero() {
           className="lg:col-span-5 relative"
         >
           <div className="relative aspect-square w-full max-w-[520px] mx-auto">
-            <div className="absolute inset-0 rounded-[2rem] bg-aurora opacity-90 blur-2xl" aria-hidden />
+            <div
+              className="absolute inset-0 rounded-[2rem] bg-aurora opacity-90 blur-2xl"
+              aria-hidden
+            />
             <div className="relative h-full w-full rounded-[2rem] overflow-hidden glass-strong ring-glow animate-float-slow">
               <img
                 src={heroOrb}
@@ -257,7 +269,11 @@ function ServicesBento() {
     <section className="container-prose py-20 md:py-32">
       <SectionHeader
         eyebrow="What we do"
-        title={<>Practical solutions, <span className="text-gradient-primary">thoughtfully built.</span></>}
+        title={
+          <>
+            Practical solutions, <span className="text-gradient-primary">thoughtfully built.</span>
+          </>
+        }
         description="From shipping production apps for businesses to mentoring students through real projects — focused work, no fluff."
       />
 
@@ -398,7 +414,9 @@ function FeaturedProjects() {
               className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/40"
             >
               <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <p className="font-mono text-[10px] uppercase tracking-widest text-primary">{p.tag}</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                {p.tag}
+              </p>
               <h3 className="mt-3 font-display text-xl font-semibold text-foreground">{p.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
               <div className="mt-5 flex flex-wrap gap-1.5">
@@ -553,7 +571,9 @@ function FutureVision() {
             className="rounded-full border border-border bg-surface/60 px-4 py-2 text-sm text-muted-foreground backdrop-blur hover:border-primary/40 hover:text-foreground transition-colors"
           >
             {label}
-            <span className="ml-2 text-[10px] font-mono uppercase tracking-widest text-primary/80">soon</span>
+            <span className="ml-2 text-[10px] font-mono uppercase tracking-widest text-primary/80">
+              soon
+            </span>
           </motion.li>
         ))}
       </motion.ul>
