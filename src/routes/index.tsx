@@ -10,7 +10,7 @@ import {
   Zap,
   Heart,
 } from "lucide-react";
-import { Lock, ShieldHalf, Cpu } from "lucide-react";
+import { Lock, Cpu } from "lucide-react";
 import { CtaLink } from "@/components/cta-button";
 import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import heroOrb from "@/assets/hero-orb.jpg";
