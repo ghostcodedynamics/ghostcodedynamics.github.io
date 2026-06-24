@@ -107,7 +107,7 @@ function WhyChooseUs() {
                 src={msmeLogo}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute right-3 bottom-3 h-25 w-25 select-none object-contain opacity-[0.50]"
+                className="pointer-events-none absolute right-3 bottom-3 h-25 w-25 select-none object-contain opacity-[0.50] rotate-[-10deg]"
                 // className="pointer-events-none absolute inset-0 m-auto h-36 w-36 object-contain opacity-[0.05]"
               />
             )}

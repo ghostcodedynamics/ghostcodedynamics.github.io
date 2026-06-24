@@ -12,10 +12,14 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — GhostCode Dynamics" },
       {
         name: "description",
-        content: "Start a conversation about your project, mentorship, or collaboration with GhostCode Dynamics.",
+        content:
+          "Start a conversation about your project, mentorship, or collaboration with GhostCode Dynamics.",
       },
       { property: "og:title", content: "Contact — GhostCode Dynamics" },
-      { property: "og:description", content: "Reach out for projects, mentorship or collaborations." },
+      {
+        property: "og:description",
+        content: "Reach out for projects, mentorship or collaborations.",
+      },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -26,6 +30,7 @@ export const Route = createFileRoute("/contact")({
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Please tell us your name").max(80),
   email: z.string().trim().email("That doesn't look like a valid email").max(160),
+  phone: z.string().trim().min(10).max(15),
   topic: z.enum(["project", "mentorship", "collab", "other"]),
   message: z.string().trim().min(10, "A few more words would help").max(1500),
 });
@@ -34,31 +39,75 @@ type ContactValues = z.infer<typeof contactSchema>;
 
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [values, setValues] = useState<ContactValues>({
-    name: "",
-    email: "",
-    topic: "project",
-    message: "",
-  });
+  const [submittedData, setSubmittedData] = useState<ContactValues | null>(null);
+  const [isSending, setIsSending] = useState(false);
+
   const [errors, setErrors] = useState<Partial<Record<keyof ContactValues, string>>>({});
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+    const values = {
+      name: String(formData.get("name") || ""),
+      email: String(formData.get("email") || ""),
+      phone: String(formData.get("phone") || ""),
+      topic: String(formData.get("topic") || "project"),
+      message: String(formData.get("message") || ""),
+    } as ContactValues;
+
     const parsed = contactSchema.safeParse(values);
+
     if (!parsed.success) {
       const errs: typeof errors = {};
+
       for (const issue of parsed.error.issues) {
         const k = issue.path[0] as keyof ContactValues;
         if (!errs[k]) errs[k] = issue.message;
       }
+
       setErrors(errs);
       toast.error("Please fix the highlighted fields.");
       return;
     }
+
     setErrors({});
-    // Future: wire this to an API route or server function
-    setSubmitted(true);
-    toast.success("Message received — we'll be in touch soon.");
+    setIsSending(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "6a694fae-2486-48cf-8b5a-c1530b9041b9",
+          subject: `New inquiry from GhostCode Dynamics - ${values.topic}`,
+          from_name: values.name,
+          email: values.email,
+          phone: values.phone,
+          topic: values.topic,
+          message: values.message,
+          botcheck: "",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmittedData(values);
+        setSubmitted(true);
+        toast.success("Message sent successfully. We'll be in touch soon.");
+      } else {
+        toast.error("Message could not be sent. Please try again.");
+      }
+    } catch {
+      toast.error("Something went wrong. Please email us directly.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -86,17 +135,18 @@ function ContactPage() {
                       <CheckCircle2 className="h-6 w-6" />
                     </div>
                     <h2 className="mt-5 font-display text-2xl font-semibold text-foreground">
-                      Message sent.
+                      Inquiry received.
                     </h2>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      Thanks, {values.name.split(" ")[0]}. We&apos;ll get back to you soon at{" "}
-                      <span className="text-foreground">{values.email}</span>.
+                      Thanks, {submittedData?.name.split(" ")[0]}. We received your inquiry and will
+                      reply within 24–48 hours at{" "}
+                      <span className="text-foreground">{submittedData?.email}</span>.
                     </p>
                     <button
                       type="button"
                       onClick={() => {
                         setSubmitted(false);
-                        setValues({ name: "", email: "", topic: "project", message: "" });
+                        setSubmittedData(null);
                       }}
                       className="mt-6 text-sm font-medium text-primary hover:underline"
                     >
@@ -108,25 +158,34 @@ function ContactPage() {
                     <div className="grid gap-5 sm:grid-cols-2">
                       <Field label="Your name" error={errors.name}>
                         <input
+                          name="name"
                           required
                           maxLength={80}
-                          value={values.name}
-                          onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
                           className={inputCls(!!errors.name)}
-                          placeholder="Jane Doe"
+                          placeholder="Enter your name"
                           autoComplete="name"
                         />
                       </Field>
                       <Field label="Email" error={errors.email}>
                         <input
+                          name="email"
                           required
                           type="email"
                           maxLength={160}
-                          value={values.email}
-                          onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
                           className={inputCls(!!errors.email)}
                           placeholder="you@company.com"
                           autoComplete="email"
+                        />
+                      </Field>
+                      <Field label="Mobile Number" error={errors.phone}>
+                        <input
+                          name="phone"
+                          type="tel"
+                          required
+                          maxLength={15}
+                          className={inputCls(!!errors.phone)}
+                          placeholder="+91 0000000000"
+                          autoComplete="tel"
                         />
                       </Field>
                     </div>
@@ -140,34 +199,29 @@ function ContactPage() {
                             ["collab", "Collaboration"],
                             ["other", "Other"],
                           ] as const
-                        ).map(([val, label]) => {
-                          const active = values.topic === val;
-                          return (
-                            <button
-                              type="button"
-                              key={val}
-                              onClick={() => setValues((v) => ({ ...v, topic: val }))}
-                              className={[
-                                "rounded-full border px-3.5 py-1.5 text-xs font-medium transition",
-                                active
-                                  ? "border-primary/60 bg-primary/15 text-foreground"
-                                  : "border-border bg-surface/60 text-muted-foreground hover:text-foreground",
-                              ].join(" ")}
-                            >
+                        ).map(([val, label]) => (
+                          <label key={val} className="cursor-pointer">
+                            <input
+                              type="radio"
+                              name="topic"
+                              value={val}
+                              defaultChecked={val === "project"}
+                              className="peer sr-only"
+                            />
+                            <span className="inline-flex rounded-full border border-border bg-surface/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition hover:text-foreground peer-checked:border-primary/60 peer-checked:bg-primary/15 peer-checked:text-foreground">
                               {label}
-                            </button>
-                          );
-                        })}
+                            </span>
+                          </label>
+                        ))}
                       </div>
                     </Field>
 
                     <Field label="Message" error={errors.message}>
                       <textarea
+                        name="message"
                         required
                         rows={6}
                         maxLength={1500}
-                        value={values.message}
-                        onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
                         className={inputCls(!!errors.message) + " resize-y"}
                         placeholder="Tell us about your project, goal or what you're trying to learn..."
                       />
@@ -179,9 +233,10 @@ function ContactPage() {
                       </p>
                       <button
                         type="submit"
-                        className="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition hover:opacity-90 shadow-elevated"
+                        disabled={isSending}
+                        className="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 shadow-elevated"
                       >
-                        Send message
+                        {isSending ? "Sending..." : "Send message"}
                       </button>
                     </div>
                   </form>
@@ -239,14 +294,20 @@ function ContactPage() {
 }
 
 function Field({
-  label, error, children,
-}: { label: string; error?: string; children: React.ReactNode }) {
+  label,
+  error,
+  children,
+}: {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
   return (
-    <label className="block">
-      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</span>
+    <div className="block">
+      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
       <div className="mt-2">{children}</div>
       {error && <p className="mt-1.5 text-xs text-destructive">{error}</p>}
-    </label>
+    </div>
   );
 }
 
@@ -259,15 +320,27 @@ function inputCls(hasError: boolean) {
 }
 
 function ContactCard({
-  icon, label, value, href, external = false,
-}: { icon: React.ReactNode; label: string; value: string; href?: string; external?: boolean }) {
+  icon,
+  label,
+  value,
+  href,
+  external = false,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+  external?: boolean;
+}) {
   const inner = (
     <div className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/40">
       <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-surface-elevated text-primary ring-1 ring-border">
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">{label}</p>
+        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+          {label}
+        </p>
         <p className="truncate text-sm text-foreground">{value}</p>
       </div>
     </div>
