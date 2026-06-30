@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ComingSoon } from "@/components/coming-soon";
+import { createNoIndexHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/labs")({
-  head: () => ({
-    meta: [
-      { title: "GhostCode Labs" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
+  head: () =>
+    createNoIndexHead(
+      "GhostCode Labs - GhostCode Dynamics",
+      "Future open security labs, side projects and experiments from GhostCode Dynamics.",
+      "/labs",
+    ),
   component: () => (
     <ComingSoon
       module="Labs"

@@ -1,11 +1,13 @@
 User-agent: *
 Allow: /
-Disallow: /labs/
-Disallow: /academy/
-Disallow: /internships/
-Disallow: /courses/
-Disallow: /verify/
-Disallow: /blog/
-Disallow: /careers/
-Disallow: /events/
-Disallow: /community/
+Disallow: /academy
+Disallow: /blog
+Disallow: /careers
+Disallow: /community
+Disallow: /courses
+Disallow: /events
+Disallow: /internships
+Disallow: /labs
+Disallow: /verify
+
+Sitemap: https://ghostcodedynamics.github.io/sitemap.xml

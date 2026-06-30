@@ -10,10 +10,14 @@ export function SiteFooter() {
           <div className="md:col-span-5">
             <Logo height={56} />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Building digital solutions for businesses while empowering the next generation of tech professionals.
+              Building digital solutions for businesses while empowering the next generation of tech
+              professionals.
             </p>
             <div className="mt-6 flex items-center gap-2">
-              <SocialLink href="https://www.linkedin.com/company/ghostcodedynamics/" label="LinkedIn">
+              <SocialLink
+                href="https://www.linkedin.com/company/ghostcodedynamics/"
+                label="LinkedIn"
+              >
                 <Linkedin className="h-4 w-4" />
               </SocialLink>
               <SocialLink href="https://www.instagram.com/ghostcode_dynamics" label="Instagram">
@@ -29,19 +33,25 @@ export function SiteFooter() {
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Explore</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Explore
+            </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <FooterLink to="/services">Services</FooterLink>
               <FooterLink to="/portfolio">Portfolio</FooterLink>
               <FooterLink to="/about">About</FooterLink>
               <FooterLink to="/founder">Founder</FooterLink>
-              <FooterLink to="/" hash="why-choose-us">Why Choose Us</FooterLink>
+              <FooterLink to="/" hash="why-choose-us">
+                Why Choose Us
+              </FooterLink>
               <FooterLink to="/contact">Contact</FooterLink>
             </ul>
           </div>
 
           <div className="md:col-span-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Get in touch</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Get in touch
+            </h4>
             <a
               href="mailto:ghostcodedynamics@gmail.com"
               className="mt-4 block text-sm text-foreground hover:text-primary transition-colors"
@@ -67,7 +77,15 @@ export function SiteFooter() {
   );
 }
 
-function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+function SocialLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <a
       href={href}
@@ -81,7 +99,15 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
   );
 }
 
-function FooterLink({ to, hash, children }: { to: string; hash?: string; children: React.ReactNode }) {
+function FooterLink({
+  to,
+  hash,
+  children,
+}: {
+  to: string;
+  hash?: string;
+  children: React.ReactNode;
+}) {
   return (
     <li>
       <Link

@@ -17,26 +17,33 @@ import { Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import heroOrb from "@/assets/hero-orb.jpg";
 import founderImg from "@/assets/founder.png";
 import msmeLogo from "@/assets/MSME-Logo.png";
+import {
+  breadcrumbSchema,
+  createSeoHead,
+  organizationSchema,
+  servicesSchema,
+  webPageSchema,
+  websiteSchema,
+} from "@/lib/seo";
+
+const title = "GhostCode Dynamics - Building Digital Solutions";
+const description =
+  "Founder-led technology brand building digital experiences for businesses and mentoring the next generation of developers.";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "GhostCode Dynamics — Building Digital Solutions" },
-      {
-        name: "description",
-        content:
-          "Founder-led technology brand. We build digital experiences for businesses and mentor the next generation of developers.",
-      },
-      { property: "og:title", content: "GhostCode Dynamics — Building Digital Solutions" },
-      {
-        property: "og:description",
-        content:
-          "Building digital solutions for businesses while empowering the next generation of tech professionals.",
-      },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/",
+      schemas: [
+        organizationSchema(),
+        websiteSchema(),
+        webPageSchema(title, description, "/"),
+        breadcrumbSchema([{ name: "Home", path: "/" }]),
+        servicesSchema(),
+      ],
+    }),
   component: HomePage,
 });
 

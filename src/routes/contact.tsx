@@ -5,25 +5,26 @@ import { Mail, Linkedin, Instagram, Github, MessageCircle, CheckCircle2 } from "
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { PageHero, Reveal } from "@/components/section";
+import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+
+const title = "Contact - GhostCode Dynamics";
+const description =
+  "Start a conversation about your project, mentorship, or collaboration with GhostCode Dynamics.";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — GhostCode Dynamics" },
-      {
-        name: "description",
-        content:
-          "Start a conversation about your project, mentorship, or collaboration with GhostCode Dynamics.",
-      },
-      { property: "og:title", content: "Contact — GhostCode Dynamics" },
-      {
-        property: "og:description",
-        content: "Reach out for projects, mentorship or collaborations.",
-      },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/contact",
+      schemas: [
+        webPageSchema(title, description, "/contact"),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]),
+      ],
+    }),
   component: ContactPage,
 });
 
@@ -156,8 +157,9 @@ function ContactPage() {
                 ) : (
                   <form onSubmit={onSubmit} className="space-y-5" noValidate>
                     <div className="grid gap-5 sm:grid-cols-2">
-                      <Field label="Your name" error={errors.name}>
+                      <Field id="contact-name" label="Your name" error={errors.name}>
                         <input
+                          id="contact-name"
                           name="name"
                           required
                           maxLength={80}
@@ -166,8 +168,9 @@ function ContactPage() {
                           autoComplete="name"
                         />
                       </Field>
-                      <Field label="Email" error={errors.email}>
+                      <Field id="contact-email" label="Email" error={errors.email}>
                         <input
+                          id="contact-email"
                           name="email"
                           required
                           type="email"
@@ -177,8 +180,9 @@ function ContactPage() {
                           autoComplete="email"
                         />
                       </Field>
-                      <Field label="Mobile Number" error={errors.phone}>
+                      <Field id="contact-phone" label="Mobile Number" error={errors.phone}>
                         <input
+                          id="contact-phone"
                           name="phone"
                           type="tel"
                           required
@@ -216,8 +220,9 @@ function ContactPage() {
                       </div>
                     </Field>
 
-                    <Field label="Message" error={errors.message}>
+                    <Field id="contact-message" label="Message" error={errors.message}>
                       <textarea
+                        id="contact-message"
                         name="message"
                         required
                         rows={6}
@@ -294,17 +299,26 @@ function ContactPage() {
 }
 
 function Field({
+  id,
   label,
   error,
   children,
 }: {
+  id?: string;
   label: string;
   error?: string;
   children: React.ReactNode;
 }) {
+  const labelClass = "text-xs font-medium uppercase tracking-wider text-muted-foreground";
   return (
     <div className="block">
-      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
+      {id ? (
+        <label htmlFor={id} className={labelClass}>
+          {label}
+        </label>
+      ) : (
+        <p className={labelClass}>{label}</p>
+      )}
       <div className="mt-2">{children}</div>
       {error && <p className="mt-1.5 text-xs text-destructive">{error}</p>}
     </div>

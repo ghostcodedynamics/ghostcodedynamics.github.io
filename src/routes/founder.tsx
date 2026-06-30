@@ -4,22 +4,28 @@ import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
 import founderImg from "@/assets/founder.png";
+import { breadcrumbSchema, createSeoHead, founderSchema, webPageSchema } from "@/lib/seo";
+
+const title = "Founder - Jeet Ahirwar | GhostCode Dynamics";
+const description =
+  "Meet Jeet Ahirwar, MCA Cybersecurity graduate, MERN developer, and founder of GhostCode Dynamics.";
 
 export const Route = createFileRoute("/founder")({
-  head: () => ({
-    meta: [
-      { title: "Founder — Jeet Ahirwar · GhostCode Dynamics" },
-      {
-        name: "description",
-        content:
-          "Meet Jeet Ahirwar — MCA (Cybersecurity), MERN developer, and founder of GhostCode Dynamics.",
-      },
-      { property: "og:title", content: "From Learner to Builder — Jeet Ahirwar" },
-      { property: "og:description", content: "The founder behind GhostCode Dynamics." },
-      { property: "og:url", content: "/founder" },
-    ],
-    links: [{ rel: "canonical", href: "/founder" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/founder",
+      type: "profile",
+      schemas: [
+        webPageSchema(title, description, "/founder"),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Founder", path: "/founder" },
+        ]),
+        founderSchema(),
+      ],
+    }),
   component: FounderPage,
 });
 

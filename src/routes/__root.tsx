@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
+  HeadContent,
   createRootRouteWithContext,
   useRouter,
 } from "@tanstack/react-router";
@@ -18,7 +19,9 @@ function NotFoundComponent() {
     <div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-background px-4">
       <div className="absolute inset-0 bg-aurora opacity-60 pointer-events-none" />
       <div className="relative max-w-md text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Error 404</p>
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
+          Error 404
+        </p>
         <h1 className="mt-3 font-display text-6xl font-semibold text-gradient">Lost in the void</h1>
         <p className="mt-4 text-sm text-muted-foreground">
           The page you're looking for has drifted somewhere else. Let's get you back on track.
@@ -49,9 +52,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
           Something glitched in the matrix
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          You can try again, or head back home.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">You can try again, or head back home.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -85,6 +86,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <ThemeProvider>
         <div className="relative flex min-h-dvh flex-col">
           <SiteNav />

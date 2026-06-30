@@ -6,12 +6,10 @@ import type { ReactNode } from "react";
 type Variant = "primary" | "secondary" | "ghost";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-foreground text-background hover:opacity-90 shadow-elevated",
+  primary: "bg-foreground text-background hover:opacity-90 shadow-elevated",
   secondary:
     "border border-border bg-surface/60 backdrop-blur text-foreground hover:bg-surface hover:border-primary/40",
-  ghost:
-    "text-foreground hover:text-primary",
+  ghost: "text-foreground hover:text-primary",
 };
 
 interface BaseProps {
@@ -47,7 +45,12 @@ export function CtaLink({
 
   if (external || href) {
     return (
-      <a href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} className={classes}>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className={classes}
+      >
         {content}
       </a>
     );

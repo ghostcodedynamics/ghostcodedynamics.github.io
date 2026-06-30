@@ -2,21 +2,26 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";
+import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+
+const title = "Portfolio - GhostCode Dynamics";
+const description =
+  "Selected GhostCode Dynamics projects across MERN web applications and cybersecurity labs, built end-to-end and documented.";
 
 export const Route = createFileRoute("/portfolio")({
-  head: () => ({
-    meta: [
-      { title: "Portfolio — GhostCode Dynamics" },
-      {
-        name: "description",
-        content: "Selected projects across MERN web apps and cybersecurity labs — built end-to-end.",
-      },
-      { property: "og:title", content: "Portfolio — GhostCode Dynamics" },
-      { property: "og:description", content: "Featured work across full-stack apps and security labs." },
-      { property: "og:url", content: "/portfolio" },
-    ],
-    links: [{ rel: "canonical", href: "/portfolio" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/portfolio",
+      schemas: [
+        webPageSchema(title, description, "/portfolio"),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Portfolio", path: "/portfolio" },
+        ]),
+      ],
+    }),
   component: PortfolioPage,
 });
 
@@ -34,32 +39,40 @@ const PROJECTS: Project[] = [
   {
     name: "OpportunityX",
     category: "Web App",
-    problem: "Job seekers and recruiters lack a clean, modern portal that connects them with relevant matches and real-time updates.",
-    solution: "A full-stack MERN job portal with role-based dashboards, smart filtering, application tracking and authentication.",
+    problem:
+      "Job seekers and recruiters lack a clean, modern portal that connects them with relevant matches and real-time updates.",
+    solution:
+      "A full-stack MERN job portal with role-based dashboards, smart filtering, application tracking and authentication.",
     tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
     github: "https://github.com/",
   },
   {
     name: "Real-Time Chat App",
     category: "Real-Time",
-    problem: "Building a responsive messaging experience with presence, typing indicators and zero perceived lag.",
-    solution: "Socket.IO powered chat with rooms, online status, typing indicators and persistent message history.",
+    problem:
+      "Building a responsive messaging experience with presence, typing indicators and zero perceived lag.",
+    solution:
+      "Socket.IO powered chat with rooms, online status, typing indicators and persistent message history.",
     tech: ["React", "Socket.IO", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/",
   },
   {
     name: "Phishing Email Investigation",
     category: "Cybersecurity",
-    problem: "Suspicious email reaches an inbox — how do you triage, extract IOCs and document the case?",
-    solution: "A walkthrough case study: header analysis, URL/sender reputation, payload inspection, and a structured response report.",
+    problem:
+      "Suspicious email reaches an inbox — how do you triage, extract IOCs and document the case?",
+    solution:
+      "A walkthrough case study: header analysis, URL/sender reputation, payload inspection, and a structured response report.",
     tech: ["Email Headers", "VirusTotal", "URLScan", "OSINT", "Markdown report"],
     github: "https://github.com/",
   },
   {
     name: "SIEM Brute Force Detection Lab",
     category: "Cybersecurity",
-    problem: "Detecting brute-force authentication attempts against Windows endpoints with low noise.",
-    solution: "Splunk-based detection rules, dashboards and triage workflow using ingested Windows event logs.",
+    problem:
+      "Detecting brute-force authentication attempts against Windows endpoints with low noise.",
+    solution:
+      "Splunk-based detection rules, dashboards and triage workflow using ingested Windows event logs.",
     tech: ["Splunk", "SPL", "Sysmon", "Windows Event Logs"],
     github: "https://github.com/",
   },
@@ -89,7 +102,10 @@ function PortfolioPage() {
               whileHover={{ y: -4 }}
               className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 md:p-8 transition-colors hover:border-primary/40 shadow-elevated"
             >
-              <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden />
+              <div
+                className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-hidden
+              />
 
               {/* Visual band (screenshot placeholder) */}
               <div className="relative -mx-6 md:-mx-8 -mt-6 md:-mt-8 mb-6 h-44 overflow-hidden rounded-t-3xl border-b border-border bg-aurora">
@@ -163,7 +179,9 @@ function PortfolioPage() {
 function Block({ label, text }: { label: string; text: string }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</p>
+      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+        {label}
+      </p>
       <p className="mt-1 text-foreground/90">{text}</p>
     </div>
   );

@@ -1,69 +1,160 @@
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GhostCode Dynamics — Building Digital Solutions</title>
-    <meta
-      name="description"
-      content="GhostCode Dynamics is a founder-led technology brand building digital solutions for businesses and empowering the next generation of tech professionals."
-    />
-    <meta name="author" content="GhostCode Dynamics" />
-    <meta name="theme-color" content="#0a0a12" />
 
-    <meta property="og:site_name" content="GhostCode Dynamics" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="GhostCode Dynamics — Building Digital Solutions" />
-    <meta
-      property="og:description"
-      content="Building digital solutions for businesses while empowering the next generation of tech professionals."
-    />
-    <meta
-      property="og:image"
-      content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0a0a12" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GhostCode Dynamics — Building Digital Solutions" />
-    <meta
-      name="twitter:description"
-      content="Building digital solutions for businesses while empowering the next generation of tech professionals."
-    />
-    <meta
-      name="twitter:image"
-      content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/610c102a-5c96-4c32-a1f9-0ca1b3a40bc9/id-preview-b8dc329d--cbf17d2f-00eb-490b-8690-50cc48660676.lovable.app-1782138778412.png"
-    />
+  <title>GhostCode Dynamics - Building Digital Solutions</title>
 
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
-    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <meta name="description"
+    content="GhostCode Dynamics is a founder-led technology brand building digital solutions for businesses and empowering the next generation of tech professionals." />
 
-    <script>
-      // Apply stored theme before paint to avoid flash
-      (function () {
-        try {
-          var t = localStorage.getItem("ghostcode-theme");
-          var isDark = t ? t === "dark" : true;
-          document.documentElement.classList.toggle("dark", isDark);
-          document.documentElement.style.colorScheme = isDark ? "dark" : "light";
-        } catch (e) {}
-      })();
+  <meta name="keywords"
+    content="GhostCode Dynamics, web development, MERN stack, software development, cybersecurity labs, student mentorship, portfolio websites, business websites" />
 
-      // GitHub Pages SPA fallback: if redirected from 404.html with ?/path, restore it.
-      (function () {
-        var l = window.location;
-        if (l.search && l.search.indexOf("?/") === 0) {
-          var decoded = l.search.slice(2).split("&").map(function (s) {
-            return s.replace(/~and~/g, "&");
-          }).join("?");
-          window.history.replaceState(null, "", l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      })();
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <meta name="author" content="GhostCode Dynamics" />
+  <meta name="publisher" content="GhostCode Dynamics" />
+  <meta name="application-name" content="GhostCode Dynamics" />
+  <meta name="apple-mobile-web-app-title" content="GhostCode" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="msapplication-TileColor" content="#0a0a12" />
+  <meta name="msapplication-config" content="none" />
+
+  <link rel="canonical" href="https://ghostcodedynamics.github.io/" />
+
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+
+  <link rel="mask-icon" href="/mask-icon.svg" color="#7c3aed" />
+
+  <link rel="preload" as="image" href="/og-image.webp" imagesrcset="/og-image.webp 1200w" />
+
+  <link rel="dns-prefetch" href="https://api.web3forms.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GhostCode Dynamics - Building Digital Solutions" />
+
+  <meta property="og:description"
+    content="Building digital solutions for businesses while empowering the next generation of tech professionals." />
+
+  <meta property="og:image" content="https://ghostcodedynamics.github.io/og-image.webp" />
+
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="GhostCode Dynamics brand preview" />
+  <meta property="og:url" content="https://ghostcodedynamics.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GhostCode Dynamics" />
+  <meta property="og:locale" content="en_IN" />
+
+  <meta property="og:image:type" content="image/webp" />
+
+  <meta property="og:image:secure_url" content="https://ghostcodedynamics.github.io/og-image.webp">
+
+  <meta name="format-detection" content="telephone=no">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="twitter:title" content="GhostCode Dynamics - Building Digital Solutions" />
+
+  <meta name="twitter:description"
+    content="Building digital solutions for businesses while empowering the next generation of tech professionals." />
+
+  <meta name="twitter:image" content="https://ghostcodedynamics.github.io/og-image.webp" />
+
+  <meta name="twitter:image:alt" content="GhostCode Dynamics brand preview" />
+
+  <meta name="twitter:creator" content="@GhostCodeHQ" />
+  <meta name="twitter:site" content="@GhostCodeHQ" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "GhostCode Dynamics",
+            "url": "https://ghostcodedynamics.github.io/",
+            "logo": "https://ghostcodedynamics.github.io/android-chrome-512.webp",
+            "email": "ghostcodedynamics@gmail.com",
+            "founder": {
+              "@type": "Person",
+              "name": "Jeet Ahirwar",
+              "url": "https://ghostcodedynamics.github.io/founder"
+            },
+            "sameAs": [
+              "https://github.com/JeetAhirwar",
+              "https://www.linkedin.com/company/ghostcodedynamics/",
+              "https://www.linkedin.com/in/jeetahirwar/",
+              "https://www.instagram.com/ghostcodedynamics"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "GhostCode Dynamics",
+            "url": "https://ghostcodedynamics.github.io/",
+            "inLanguage": "en"
+          }
+        ]
+      }
     </script>
-  </head>
-  <body class="min-h-dvh bg-background text-foreground antialiased">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+  <!-- Theme + SPA Redirect -->
+  <script>
+    (function ()
+    {
+      try
+      {
+        var t = localStorage.getItem("ghostcode-theme");
+        var isDark = t ? t === "dark" : true;
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+      } catch (e) { }
+    })();
+
+    (function ()
+    {
+      var l = window.location;
+      if (l.search && l.search.indexOf("?/") === 0)
+      {
+        var decoded = l.search
+          .slice(2)
+          .split("&")
+          .map(function (s)
+          {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          "",
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    })();
+  </script>
+</head>
+
+<body class="min-h-dvh bg-background text-foreground antialiased">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

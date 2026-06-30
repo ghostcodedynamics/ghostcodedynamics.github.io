@@ -3,31 +3,60 @@ import { Eye, Target, Heart, Sprout, Shield, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
+import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+
+const title = "About - GhostCode Dynamics";
+const description =
+  "The story, mission and values behind GhostCode Dynamics, a founder-led tech brand built on practical work, transparency and student empowerment.";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — GhostCode Dynamics" },
-      {
-        name: "description",
-        content: "The story, mission and values behind GhostCode Dynamics — a founder-led tech brand built on substance.",
-      },
-      { property: "og:title", content: "About — GhostCode Dynamics" },
-      { property: "og:description", content: "Why GhostCode exists, how it started, and where it's heading." },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/about",
+      schemas: [
+        webPageSchema(title, description, "/about"),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]),
+      ],
+    }),
   component: AboutPage,
 });
 
 const VALUES = [
-  { icon: <Sprout className="h-5 w-5" />, title: "Growth mindset", desc: "Every project is a chance to learn something we didn't know yesterday." },
-  { icon: <Eye className="h-5 w-5" />, title: "Transparency", desc: "Honest timelines, public code, no inflated promises." },
-  { icon: <Heart className="h-5 w-5" />, title: "Craft", desc: "Small details matter — typography, motion, words, all of it." },
-  { icon: <Shield className="h-5 w-5" />, title: "Trust", desc: "We protect the work, the relationship, and the people we serve." },
-  { icon: <Target className="h-5 w-5" />, title: "Focus", desc: "Tight scope. Real outcomes. No buzzwords." },
-  { icon: <Sparkles className="h-5 w-5" />, title: "Empowerment", desc: "We grow by helping others grow — students, peers, clients." },
+  {
+    icon: <Sprout className="h-5 w-5" />,
+    title: "Growth mindset",
+    desc: "Every project is a chance to learn something we didn't know yesterday.",
+  },
+  {
+    icon: <Eye className="h-5 w-5" />,
+    title: "Transparency",
+    desc: "Honest timelines, public code, no inflated promises.",
+  },
+  {
+    icon: <Heart className="h-5 w-5" />,
+    title: "Craft",
+    desc: "Small details matter — typography, motion, words, all of it.",
+  },
+  {
+    icon: <Shield className="h-5 w-5" />,
+    title: "Trust",
+    desc: "We protect the work, the relationship, and the people we serve.",
+  },
+  {
+    icon: <Target className="h-5 w-5" />,
+    title: "Focus",
+    desc: "Tight scope. Real outcomes. No buzzwords.",
+  },
+  {
+    icon: <Sparkles className="h-5 w-5" />,
+    title: "Empowerment",
+    desc: "We grow by helping others grow — students, peers, clients.",
+  },
 ];
 
 function AboutPage() {
@@ -42,7 +71,9 @@ function AboutPage() {
       <section className="container-prose py-16 md:py-24">
         <div className="grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-5">
-            <p className="font-mono text-xs uppercase tracking-widest text-primary">Why it started</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-primary">
+              Why it started
+            </p>
             <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Built from a gap.
             </h2>
@@ -134,11 +165,13 @@ function AboutPage() {
                 Building Trust, One Project at a Time.
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-                Every meaningful collaboration starts with a single success story. Future testimonials
-                from clients and students will live here as they happen.
+                Every meaningful collaboration starts with a single success story. Future
+                testimonials from clients and students will live here as they happen.
               </p>
               <div className="mt-8">
-                <CtaLink to="/contact" variant="primary">Be the first story</CtaLink>
+                <CtaLink to="/contact" variant="primary">
+                  Be the first story
+                </CtaLink>
               </div>
             </div>
           </div>

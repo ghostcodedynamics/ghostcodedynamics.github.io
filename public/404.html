@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting - GhostCode Dynamics</title>
+    <script>
+      var path = window.location.pathname;
+      var repoBase = "/";
+      var redirect = repoBase + "?/" + path.slice(repoBase.length).replace(/&/g, "~and~");
+      window.location.replace(redirect + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>

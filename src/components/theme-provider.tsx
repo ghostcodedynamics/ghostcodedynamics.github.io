@@ -21,7 +21,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       if (stored === "light" || stored === "dark") {
         setThemeState(stored);
       }
-    } catch {}
+    } catch {
+      // Ignore storage access failures in privacy-restricted browsing contexts.
+    }
   }, []);
 
   useEffect(() => {
@@ -30,16 +32,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.colorScheme = theme;
     try {
       localStorage.setItem(STORAGE_KEY, theme);
-    } catch {}
+    } catch {
+      // Theme still applies even if persistence is unavailable.
+    }
   }, [theme]);
 
   const setTheme = (t: Theme) => setThemeState(t);
   const toggle = () => setThemeState((t) => (t === "dark" ? "light" : "dark"));
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggle }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, toggle }}>{children}</ThemeContext.Provider>
   );
 }
 

@@ -1,30 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Globe, Layout, Rocket, AppWindow, GraduationCap, FileCode, Compass,
-  ShieldCheck, Activity, BookOpen, Search,
+  Globe,
+  Layout,
+  Rocket,
+  AppWindow,
+  GraduationCap,
+  FileCode,
+  Compass,
+  ShieldCheck,
+  Activity,
+  BookOpen,
+  Search,
 } from "lucide-react";
 import { PageHero, Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
 import { motion } from "framer-motion";
+import { breadcrumbSchema, createSeoHead, servicesSchema, webPageSchema } from "@/lib/seo";
+
+const title = "Services - GhostCode Dynamics";
+const description =
+  "Digital solutions for businesses, mentorship for students, and hands-on cybersecurity learning projects from GhostCode Dynamics.";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services — GhostCode Dynamics" },
-      {
-        name: "description",
-        content:
-          "Digital solutions for businesses, mentorship for students, and hands-on cybersecurity learning projects.",
-      },
-      { property: "og:title", content: "Services — GhostCode Dynamics" },
-      {
-        property: "og:description",
-        content: "Websites, web apps, mentorship, and security learning labs — built with care.",
-      },
-      { property: "og:url", content: "/services" },
-    ],
-    links: [{ rel: "canonical", href: "/services" }],
-  }),
+  head: () =>
+    createSeoHead({
+      title,
+      description,
+      path: "/services",
+      schemas: [
+        webPageSchema(title, description, "/services"),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]),
+        servicesSchema(),
+      ],
+    }),
   component: ServicesPage,
 });
 
@@ -131,8 +142,12 @@ function ServicesPage() {
         description="Three focused service areas — digital solutions for businesses, mentorship for students, and hands-on security learning."
       >
         <div className="flex flex-wrap gap-3">
-          <CtaLink to="/contact" variant="primary">Start a conversation</CtaLink>
-          <CtaLink to="/portfolio" variant="secondary">See past work</CtaLink>
+          <CtaLink to="/contact" variant="primary">
+            Start a conversation
+          </CtaLink>
+          <CtaLink to="/portfolio" variant="secondary">
+            See past work
+          </CtaLink>
         </div>
       </PageHero>
 
@@ -164,10 +179,13 @@ function ServicesPage() {
                 Not sure which fits?
               </h2>
               <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
-                Send a short note about your project or goal — we&apos;ll suggest the best path forward.
+                Send a short note about your project or goal — we&apos;ll suggest the best path
+                forward.
               </p>
               <div className="mt-6">
-                <CtaLink to="/contact" variant="primary">Get in touch</CtaLink>
+                <CtaLink to="/contact" variant="primary">
+                  Get in touch
+                </CtaLink>
               </div>
             </div>
           </div>
@@ -178,7 +196,10 @@ function ServicesPage() {
 }
 
 function ServiceGroup({
-  eyebrow, title, description, services,
+  eyebrow,
+  title,
+  description,
+  services,
 }: {
   eyebrow: string;
   title: string;

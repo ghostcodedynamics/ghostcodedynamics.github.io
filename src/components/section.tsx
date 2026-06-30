@@ -16,16 +16,13 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  as: As = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: React.ElementType;
 }) {
-  const MotionTag = motion(As as any);
   return (
-    <MotionTag
+    <motion.div
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
@@ -34,7 +31,7 @@ export function Reveal({
       className={className}
     >
       {children}
-    </MotionTag>
+    </motion.div>
   );
 }
 

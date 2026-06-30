@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ComingSoon } from "@/components/coming-soon";
+import { createNoIndexHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/verify")({
-  head: () => ({
-    meta: [
-      { title: "Certificate Verification — GhostCode Dynamics" },
-      { name: "robots", content: "noindex, nofollow" },
-    ],
-  }),
+  head: () =>
+    createNoIndexHead(
+      "Certificate Verification - GhostCode Dynamics",
+      "Future certificate lookup for GhostCode cohorts, internships and programs.",
+      "/verify",
+    ),
   component: () => (
     <ComingSoon
       module="Verify"
