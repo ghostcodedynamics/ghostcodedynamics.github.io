@@ -18,13 +18,13 @@ import heroOrb from "@/assets/hero-orb.jpg";
 import founderImg from "@/assets/founder.png";
 import msmeLogo from "@/assets/MSME-Logo.png";
 import {
-import { Seo } from "@/components/seo";
   breadcrumbSchema,
   organizationSchema,
   servicesSchema,
   webPageSchema,
   websiteSchema,
 } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "GhostCode Dynamics - Building Digital Solutions";
 const description =
