@@ -1,16 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ComingSoon } from "@/components/coming-soon";
-import { createNoIndexHead } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
-export const Route = createFileRoute("/internships")({
-  head: () =>
-    createNoIndexHead(
-      "Internships - GhostCode Dynamics",
-      "A future internship program for students who want to build production-grade work.",
-      "/internships",
-    ),
-  component: () => (
-    <ComingSoon
+export default function Page() {
+  return (
+    <>
+      <Seo title={"Internships - GhostCode Dynamics"} description={"A future internship program for students who want to build production-grade work."} path={"/internships"} robots="noindex, follow" />
+      <ComingSoon
       module="Internships"
       title="Real internships. Real projects."
       description="A future internship program at GhostCode Dynamics — for students who want to build production-grade work alongside the team."
@@ -21,5 +16,6 @@ export const Route = createFileRoute("/internships")({
         "Certificate of completion",
       ]}
     />
-  ),
-});
+    </>
+  );
+}

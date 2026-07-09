@@ -1,16 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ComingSoon } from "@/components/coming-soon";
-import { createNoIndexHead } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
-export const Route = createFileRoute("/courses")({
-  head: () =>
-    createNoIndexHead(
-      "Courses - GhostCode Dynamics",
-      "Future practical courses on MERN, security fundamentals and modern web development.",
-      "/courses",
-    ),
-  component: () => (
-    <ComingSoon
+export default function Page() {
+  return (
+    <>
+      <Seo title={"Courses - GhostCode Dynamics"} description={"Future practical courses on MERN} path={security fundamentals and modern web development."} robots="noindex, follow" />
+      <ComingSoon
       module="Courses"
       title="Practical courses, built by builders."
       description="Short, focused courses on MERN, security fundamentals and modern web — written by someone who ships, not just teaches."
@@ -21,5 +16,6 @@ export const Route = createFileRoute("/courses")({
         "Community Q&A",
       ]}
     />
-  ),
-});
+    </>
+  );
+}

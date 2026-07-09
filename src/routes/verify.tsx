@@ -1,16 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { ComingSoon } from "@/components/coming-soon";
-import { createNoIndexHead } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
-export const Route = createFileRoute("/verify")({
-  head: () =>
-    createNoIndexHead(
-      "Certificate Verification - GhostCode Dynamics",
-      "Future certificate lookup for GhostCode cohorts, internships and programs.",
-      "/verify",
-    ),
-  component: () => (
-    <ComingSoon
+export default function Page() {
+  return (
+    <>
+      <Seo title={"Certificate Verification - GhostCode Dynamics"} description={"Future certificate lookup for GhostCode cohorts} path={internships and programs."} robots="noindex, follow" />
+      <ComingSoon
       module="Verify"
       title="Verify a GhostCode certificate."
       description="Once cohorts and internships go live, certificate IDs will be verifiable here in seconds."
@@ -21,5 +16,6 @@ export const Route = createFileRoute("/verify")({
         "QR-code friendly",
       ]}
     />
-  ),
-});
+    </>
+  );
+}

@@ -1,19 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, Linkedin, Instagram, Github, MessageCircle, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { PageHero, Reveal } from "@/components/section";
-import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "Contact - GhostCode Dynamics";
 const description =
   "Start a conversation about your project, mentorship, or collaboration with GhostCode Dynamics.";
 
-export const Route = createFileRoute("/contact")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/contact",
@@ -24,9 +23,17 @@ export const Route = createFileRoute("/contact")({
           { name: "Contact", path: "/contact" },
         ]),
       ],
-    }),
-  component: ContactPage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <ContactPage />
+    </>
+  );
+}
+
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Please tell us your name").max(80),

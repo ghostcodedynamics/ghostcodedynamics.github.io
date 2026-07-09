@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+
 import {
   Globe,
   Layout,
@@ -15,15 +15,14 @@ import {
 import { PageHero, Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
 import { motion } from "framer-motion";
-import { breadcrumbSchema, createSeoHead, servicesSchema, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, servicesSchema, webPageSchema } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "Services - GhostCode Dynamics";
 const description =
   "Digital solutions for businesses, mentorship for students, and hands-on cybersecurity learning projects from GhostCode Dynamics.";
 
-export const Route = createFileRoute("/services")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/services",
@@ -35,9 +34,17 @@ export const Route = createFileRoute("/services")({
         ]),
         servicesSchema(),
       ],
-    }),
-  component: ServicesPage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <ServicesPage />
+    </>
+  );
+}
+
 
 interface Service {
   icon: React.ReactNode;

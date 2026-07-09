@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 import { Logo } from "./brand/logo";
 
@@ -111,8 +111,7 @@ function FooterLink({
   return (
     <li>
       <Link
-        to={to}
-        hash={hash}
+        to={hash ? `${to}#${hash}` : to}
         className="text-muted-foreground transition-colors hover:text-foreground"
       >
         {children}

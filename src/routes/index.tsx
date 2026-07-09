@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -19,20 +19,18 @@ import founderImg from "@/assets/founder.png";
 import msmeLogo from "@/assets/MSME-Logo.png";
 import {
   breadcrumbSchema,
-  createSeoHead,
   organizationSchema,
   servicesSchema,
   webPageSchema,
   websiteSchema,
 } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "GhostCode Dynamics - Building Digital Solutions";
 const description =
   "Founder-led technology brand building digital experiences for businesses and mentoring the next generation of developers.";
 
-export const Route = createFileRoute("/")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/",
@@ -43,9 +41,17 @@ export const Route = createFileRoute("/")({
         breadcrumbSchema([{ name: "Home", path: "/" }]),
         servicesSchema(),
       ],
-    }),
-  component: HomePage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <HomePage />
+    </>
+  );
+}
+
 
 function HomePage() {
   return (
