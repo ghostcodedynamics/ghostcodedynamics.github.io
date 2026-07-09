@@ -1,19 +1,15 @@
-import { createFileRoute } from "react-router-dom";
 import { ComingSoon } from "@/components/coming-soon";
-import { createNoIndexHead } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
-export const Route = createFileRoute("/academy")({
-  head: () =>
-    createNoIndexHead(
-      "GhostCode Academy - GhostCode Dynamics",
-      "A future education arm for structured learning paths in modern web development and cybersecurity.",
-      "/academy",
-    ),
-  component: () => (
-    <ComingSoon
+export default function Page() {
+  return (
+    <>
+      <Seo title={"GhostCode Academy - GhostCode Dynamics"} description={"A future education arm for structured learning paths in modern web development and cybersecurity."} path={"/academy"} robots="noindex, follow" />
+      <ComingSoon
       module="Academy"
       title="GhostCode Academy."
       description="A future education arm — structured learning paths in modern web development and security, built around real projects."
     />
-  ),
-});
+    </>
+  );
+}
