@@ -1,18 +1,17 @@
-import { createFileRoute } from "react-router-dom";
+
 import { Linkedin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
 import founderImg from "@/assets/founder.png";
-import { breadcrumbSchema, createSeoHead, founderSchema, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, founderSchema, webPageSchema } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "Founder - Jeet Ahirwar | GhostCode Dynamics";
 const description =
   "Meet Jeet Ahirwar, MCA Cybersecurity graduate, MERN developer, and founder of GhostCode Dynamics.";
 
-export const Route = createFileRoute("/founder")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/founder",
@@ -25,9 +24,17 @@ export const Route = createFileRoute("/founder")({
         ]),
         founderSchema(),
       ],
-    }),
-  component: FounderPage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <FounderPage />
+    </>
+  );
+}
+
 
 const PERSON_JSON_LD = JSON.stringify({
   "@context": "https://schema.org",

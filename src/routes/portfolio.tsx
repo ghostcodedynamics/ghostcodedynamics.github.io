@@ -1,16 +1,15 @@
-import { createFileRoute } from "react-router-dom";
+
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";
-import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "Portfolio - GhostCode Dynamics";
 const description =
   "Selected GhostCode Dynamics projects across MERN web applications and cybersecurity labs, built end-to-end and documented.";
 
-export const Route = createFileRoute("/portfolio")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/portfolio",
@@ -21,9 +20,17 @@ export const Route = createFileRoute("/portfolio")({
           { name: "Portfolio", path: "/portfolio" },
         ]),
       ],
-    }),
-  component: PortfolioPage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <PortfolioPage />
+    </>
+  );
+}
+
 
 interface Project {
   name: string;

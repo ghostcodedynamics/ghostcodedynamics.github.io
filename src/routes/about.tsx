@@ -1,17 +1,16 @@
-import { createFileRoute } from "react-router-dom";
+
 import { Eye, Target, Heart, Sprout, Shield, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
 import { CtaLink } from "@/components/cta-button";
-import { breadcrumbSchema, createSeoHead, webPageSchema } from "@/lib/seo";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo";
+import { Seo } from "@/components/seo";
 
 const title = "About - GhostCode Dynamics";
 const description =
   "The story, mission and values behind GhostCode Dynamics, a founder-led tech brand built on practical work, transparency and student empowerment.";
 
-export const Route = createFileRoute("/about")({
-  head: () =>
-    createSeoHead({
+const seoOptions = {
       title,
       description,
       path: "/about",
@@ -22,9 +21,17 @@ export const Route = createFileRoute("/about")({
           { name: "About", path: "/about" },
         ]),
       ],
-    }),
-  component: AboutPage,
-});
+    } as const;
+
+export default function Page() {
+  return (
+    <>
+      <Seo {...seoOptions} />
+      <AboutPage />
+    </>
+  );
+}
+
 
 const VALUES = [
   {
