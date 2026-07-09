@@ -11,7 +11,7 @@ interface SeoProps {
   type?: "website" | "article" | "profile";
   robots?: string;
   keywords?: string;
-  schemas?: JsonLd[];
+  schemas?: readonly JsonLd[];
 }
 
 /**
