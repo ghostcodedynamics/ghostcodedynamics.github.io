@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "./brand/logo";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
-
-const NAV_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/portfolio", label: "Portfolio" },
-  { to: "/about", label: "About" },
-  { to: "/founder", label: "Founder" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { NAV_LINKS } from "@/constants/navigation";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +27,7 @@ export function SiteNav() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="container-prose flex h-16 items-center justify-between">
+      <nav className="container-prose flex h-16 items-center justify-between" aria-label="Primary">
         <Link to="/" className="group" aria-label="GhostCode Dynamics home">
           <Logo />
         </Link>
@@ -43,14 +35,20 @@ export function SiteNav() {
         <ul className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((l) => (
             <li key={l.to}>
-              <Link
+              <NavLink
                 to={l.to}
-                className="relative px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                activeProps={{ className: "text-foreground" }}
-                activeOptions={{ exact: l.to === "/" }}
+                end={l.to === "/"}
+                className={({ isActive }) =>
+                  cn(
+                    "relative px-3 py-2 text-sm transition-colors",
+                    isActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
+                  )
+                }
               >
                 {l.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -67,7 +65,7 @@ export function SiteNav() {
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface/60 text-foreground"
+            className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/60 text-foreground"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -88,15 +86,21 @@ export function SiteNav() {
             <ul className="container-prose py-4 flex flex-col gap-1">
               {NAV_LINKS.map((l) => (
                 <li key={l.to}>
-                  <Link
+                  <NavLink
                     to={l.to}
+                    end={l.to === "/"}
                     onClick={() => setOpen(false)}
-                    className="block rounded-md px-3 py-2.5 text-base text-muted-foreground hover:bg-accent hover:text-foreground"
-                    activeProps={{ className: "text-foreground bg-accent/60" }}
-                    activeOptions={{ exact: l.to === "/" }}
+                    className={({ isActive }) =>
+                      cn(
+                        "block rounded-md px-3 py-2.5 text-base",
+                        isActive
+                          ? "text-foreground bg-accent/60"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                      )
+                    }
                   >
                     {l.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
