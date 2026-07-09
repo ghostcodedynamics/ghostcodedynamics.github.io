@@ -89,7 +89,7 @@ function BlogPage() {
       <Seo {...seoOptions} />
 
       <PageHero
-        kicker="GhostCode Insights"
+        eyebrow="GhostCode Insights"
         title={
           <>
             Notes from the <span className="text-gradient">lab.</span>
@@ -142,7 +142,7 @@ function BlogPage() {
 
       {featured && !search && category === "All" && !tag && (
         <section className="container-prose">
-          <SectionHeader kicker="Featured" title="This week's read" icon={<Sparkles className="h-4 w-4" />} />
+          <SectionHeader eyebrow="Featured" title="This week's read" />
           <Reveal>
             <PostCard post={featured} variant="featured" />
           </Reveal>
@@ -152,7 +152,7 @@ function BlogPage() {
       <section className="container-prose mt-16">
         <div className="flex items-end justify-between gap-4">
           <SectionHeader
-            kicker="Latest"
+            eyebrow="Latest"
             title={search || category !== "All" || tag ? "Results" : "Latest articles"}
           />
           <p className="pb-2 text-xs text-muted-foreground">
@@ -184,9 +184,9 @@ function BlogPage() {
         {trending.length > 0 && (
           <div>
             <SectionHeader
-              kicker="Trending"
+              eyebrow="Trending"
               title="What readers are on"
-              icon={<TrendingUp className="h-4 w-4" />}
+
             />
             <ul className="space-y-3">
               {trending.map((p, i) => (
@@ -214,9 +214,9 @@ function BlogPage() {
         {picks.length > 0 && (
           <div>
             <SectionHeader
-              kicker="Editor's picks"
+              eyebrow="Editor's picks"
               title="Handpicked reads"
-              icon={<Star className="h-4 w-4" />}
+
             />
             <div className="grid gap-4">
               {picks.map((p) => (
@@ -228,7 +228,7 @@ function BlogPage() {
       </section>
 
       <section className="container-prose mt-20">
-        <SectionHeader kicker="Tags" title="Browse by topic" />
+        <SectionHeader eyebrow="Tags" title="Browse by topic" />
         <div className="flex flex-wrap gap-2">
           {tags.map((t) => (
             <button
