@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "react-router-dom";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, fadeUp, stagger } from "@/components/section";

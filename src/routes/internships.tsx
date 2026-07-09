@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "react-router-dom";
 import { ComingSoon } from "@/components/coming-soon";
 import { createNoIndexHead } from "@/lib/seo";
 

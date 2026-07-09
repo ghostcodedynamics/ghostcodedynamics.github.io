@@ -5,7 +5,7 @@ import {
   HeadContent,
   createRootRouteWithContext,
   useRouter,
-} from "@tanstack/react-router";
+} from "react-router-dom";
 import { useEffect } from "react";
 
 import { reportLovableError } from "../lib/lovable-error-reporting";

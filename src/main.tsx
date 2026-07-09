@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RouterProvider } from "@tanstack/react-router";
+import { RouterProvider } from "react-router-dom";
 
 import "./styles.css";
 import "@fontsource-variable/inter";
@@ -11,7 +11,7 @@ import { getRouter } from "./router";
 
 const router = getRouter();
 
-declare module "@tanstack/react-router" {
+declare module "react-router-dom" {
   interface Register {
     router: ReturnType<typeof getRouter>;
   }

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "react-router-dom";
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, Linkedin, Instagram, Github, MessageCircle, CheckCircle2 } from "lucide-react";

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "react-router-dom";
 import { Eye, Target, Heart, Sprout, Shield, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { PageHero, Reveal, SectionHeader, fadeUp, stagger } from "@/components/section";
