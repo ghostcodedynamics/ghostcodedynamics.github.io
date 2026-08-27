@@ -32,13 +32,14 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Explore
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <FooterLink to="/services">Services</FooterLink>
               <FooterLink to="/portfolio">Portfolio</FooterLink>
+              <FooterLink to="/blog">Insights</FooterLink>
               <FooterLink to="/about">About</FooterLink>
               <FooterLink to="/founder">Founder</FooterLink>
               <FooterLink to="/" hash="why-choose-us">
@@ -48,7 +49,23 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Programs
+            </h4>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <FooterLink to="/academy">Academy</FooterLink>
+              <FooterLink to="/courses">Courses</FooterLink>
+              <FooterLink to="/internships">Internships</FooterLink>
+              <FooterLink to="/events">Events</FooterLink>
+              <FooterLink to="/community">Community</FooterLink>
+              <FooterLink to="/labs">Labs</FooterLink>
+              <FooterLink to="/careers">Careers</FooterLink>
+              <FooterLink to="/verify">Verify a certificate</FooterLink>
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Get in touch
             </h4>
@@ -62,6 +79,7 @@ export function SiteFooter() {
               For project inquiries, mentorship & collaborations.
             </p>
           </div>
+
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border/60 pt-6 sm:flex-row sm:items-center sm:justify-between">

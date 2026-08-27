@@ -1,21 +1,140 @@
-import { ComingSoon } from "@/components/coming-soon";
+import { Briefcase, GitBranch, MessageSquare, Award, Target, Clock } from "lucide-react";
+import { PageHero } from "@/components/section";
 import { Seo } from "@/components/seo";
+import { Faq, FeatureGrid, ProgramCta, StatusNote, Timeline } from "@/components/program-page";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo";
+
+const title = "Internships - GhostCode Dynamics";
+const description =
+  "A project-based internship program at GhostCode Dynamics for students who want to ship production-grade work with real mentorship, not busywork.";
+const path = "/internships";
+
+const PILLARS = [
+  {
+    icon: <Target className="h-5 w-5" />,
+    title: "Real briefs, real scope",
+    desc: "You work on scoped slices of live client and in-house projects — not throwaway sample apps built to fill a certificate.",
+  },
+  {
+    icon: <MessageSquare className="h-5 w-5" />,
+    title: "Founder-level mentorship",
+    desc: "Direct code review and weekly one-to-one feedback from the founder. Fewer interns, more attention.",
+  },
+  {
+    icon: <GitBranch className="h-5 w-5" />,
+    title: "Professional workflow",
+    desc: "Branches, pull requests, reviews, issue tracking and deploys. You leave knowing how teams actually ship.",
+  },
+  {
+    icon: <Briefcase className="h-5 w-5" />,
+    title: "Portfolio-first outcome",
+    desc: "Every internship ends with a documented case study you can show in interviews and link from your CV.",
+  },
+  {
+    icon: <Clock className="h-5 w-5" />,
+    title: "Student-friendly hours",
+    desc: "Part-time, remote-first blocks designed around semesters and exams rather than fighting them.",
+  },
+  {
+    icon: <Award className="h-5 w-5" />,
+    title: "Verifiable certificate",
+    desc: "Completion issues a certificate with an ID anyone can check on our verification page.",
+  },
+];
+
+const PHASES = [
+  {
+    label: "Step 01",
+    title: "Apply with your work",
+    desc: "Share a GitHub profile, a deployed project or anything you have built. Effort counts more than polish.",
+  },
+  {
+    label: "Step 02",
+    title: "Short conversation",
+    desc: "A relaxed call about how you think, what you want to learn and where you currently get stuck.",
+  },
+  {
+    label: "Step 03",
+    title: "Onboarding sprint",
+    desc: "Environment setup, codebase walkthrough and a small first ticket to get you comfortable shipping.",
+  },
+  {
+    label: "Step 04",
+    title: "Project block",
+    desc: "Six to twelve weeks owning features end to end, with reviews, standups and a written build journal.",
+  },
+  {
+    label: "Step 05",
+    title: "Wrap-up and certificate",
+    desc: "A final demo, a public case study and a verifiable completion certificate.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is the internship program live?",
+    a: "Not yet. Applications open with the first cohort. Registering interest now puts you on the shortlist we contact first.",
+  },
+  {
+    q: "Is it paid?",
+    a: "The first cohorts are unpaid but genuinely educational, with a stipend planned as client capacity grows. We will never charge students to intern.",
+  },
+  {
+    q: "Do I need to be a computer science student?",
+    a: "No. You need working fundamentals in HTML, CSS and JavaScript, and the discipline to finish what you start.",
+  },
+  {
+    q: "Is it remote?",
+    a: "Yes, remote-first with scheduled review calls. Time zones inside India are easiest, but we consider everyone.",
+  },
+];
 
 export default function Page() {
   return (
     <>
-      <Seo title={"Internships - GhostCode Dynamics"} description={"A future internship program for students who want to build production-grade work."} path={"/internships"} robots="noindex, follow" />
-      <ComingSoon
-      module="Internships"
-      title="Real internships. Real projects."
-      description="A future internship program at GhostCode Dynamics — for students who want to build production-grade work alongside the team."
-      bullets={[
-        "Project-based learning, not busywork",
-        "Mentorship from the founder",
-        "Open-source friendly experience",
-        "Certificate of completion",
-      ]}
-    />
+      <Seo
+        title={title}
+        description={description}
+        path={path}
+        schemas={[
+          webPageSchema(title, description, path),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Internships", path },
+          ]),
+        ]}
+      />
+      <PageHero
+        eyebrow="Internships · Opening soon"
+        title="Real internships. Real projects."
+        description="An internship at GhostCode Dynamics is a working seat on real product work — scoped features, code review, deploys and a documented outcome you can point recruiters at."
+      >
+        <StatusNote>Applications not open yet · Shortlist forming</StatusNote>
+      </PageHero>
+
+      <FeatureGrid
+        eyebrow="What you get"
+        title="Built to make you employable"
+        description="Everything here exists because it shows up in interviews — the work, the workflow and the write-up."
+        items={PILLARS}
+      />
+
+      <Timeline
+        eyebrow="Process"
+        title="How an internship runs"
+        description="Predictable structure from the first message to the final certificate."
+        items={PHASES}
+      />
+
+      <Faq items={FAQS} />
+
+      <ProgramCta
+        title="Get on the internship shortlist"
+        description="Send your best work and what you want to build. We read every submission and reply to the ones we can help."
+        primaryLabel="Apply for a spot"
+        secondaryLabel="See open roles"
+        secondaryTo="/careers"
+      />
     </>
   );
 }
